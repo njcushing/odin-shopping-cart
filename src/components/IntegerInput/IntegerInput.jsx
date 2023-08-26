@@ -23,7 +23,14 @@ const IntegerInput = ({
                 max={numberMax}
                 className={styles["number-input"]}
                 value={number}
-                onChange={numberOnChangeHandler}
+                onKeyDown={(e) => {
+                    if (e.key === '.') e.preventDefault();
+                }}
+                onChange={(e) => {
+                    if (e.target.value.length === 0) e.target.value = "0";
+                    e.target.value = Math.floor(Number.parseInt(e.target.value)).toString();
+                    numberOnChangeHandler(e);
+                }}
             ></input>
         </label>
         </>
