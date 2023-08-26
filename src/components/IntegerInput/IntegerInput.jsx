@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styles from './NumberInput.module.css';
+import styles from './IntegerInput.module.css';
 
-const NumberInput = ({
+const IntegerInput = ({
     label,
     number,
     numberMin,
@@ -30,7 +30,7 @@ const NumberInput = ({
     )
 };
 
-NumberInput.propTypes = {
+IntegerInput.propTypes = {
     label: PropTypes.string,
     number: PropTypes.number,
     numberMin: PropTypes.number,
@@ -38,7 +38,7 @@ NumberInput.propTypes = {
     numberOnChangeHandler: PropTypes.func,
 }
 
-NumberInput.defaultProps = {
+IntegerInput.defaultProps = {
     label: "Number: ",
     number: 0,
     numberMin: 0,
@@ -46,4 +46,4 @@ NumberInput.defaultProps = {
     numberOnChangeHandler: () => {},
 }
 
-export default NumberInput;
+export default IntegerInput;
