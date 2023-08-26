@@ -16,7 +16,7 @@ describe("Prop testing...", () => {
             expect(quantityInput.value).toBe("0");
         });
         test("Should have its value floored if it is not an integer", () => {
-            render(<ShopItemCard quantity={3.5} />);
+            render(<ShopItemCard quantity={3.5} quantityMin={0} quantityMax={100} />);
             const quantityInput = screen.getByRole("textbox", { name: /Quantity:/i });
             expect(quantityInput.value).toBe("3");
         });
