@@ -14,23 +14,18 @@ const ShopItemCard = ({
     quantityMax,
     quantityOnChangeHandler,
 }) => {
-    quantity = Math.floor(Math.max(quantity, 0));
-    const [currentQuantity, setCurrentQuantity] = useState(quantity);
+    quantityMin = Math.floor(Math.max(Math.min(quantityMin, quantityMax), 0));
+    quantityMax = Math.floor(Math.min(Math.max(quantityMax, quantityMin), Number.MAX_SAFE_INTEGER));
 
-    quantityMin = Math.max(Math.min(quantity, quantityMin), 0);
-    quantityMax = Math.max(quantity, quantityMax);
+    quantity = Math.floor(Math.max(Math.min(quantity, quantityMax), quantityMin));
 
     return (
         <>
         <label>Quantity: 
             <input
                 className={styles["quantity-input"]}
-                value={currentQuantity}
-                onChange={(e) => {
-                    setCurrentQuantity(
-                        Math.floor(Math.min(Math.max(quantityMin, e.target.value), quantityMax))
-                    )
-                }}
+                value={quantity}
+                onChange={quantityOnChangeHandler}
             ></input>
         </label>
         </>
