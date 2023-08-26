@@ -25,6 +25,16 @@ describe("Prop testing...", () => {
             const quantityInput = screen.getByRole("textbox", { name: /Quantity:/i });
             expect(quantityInput.value).toBe("0");
         });
+        test("Should never have a value lower than the 'quantityMin' prop's value", () => {
+            render(<ShopItemCard quantity={3} quantityMin={7} quantityMax={100} />);
+            const quantityInput = screen.getByRole("textbox", { name: /Quantity:/i });
+            expect(quantityInput.value).toBe("7");
+        });
+        test("Should never have a value higher than the 'quantityMax' prop's value", () => {
+            render(<ShopItemCard quantity={15} quantityMin={0} quantityMax={10} />);
+            const quantityInput = screen.getByRole("textbox", { name: /Quantity:/i });
+            expect(quantityInput.value).toBe("10");
+        });
     });
 });
 
