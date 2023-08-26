@@ -27,7 +27,7 @@ const IntegerInput = ({
                     if (e.key === '.') e.preventDefault();
                 }}
                 onChange={(e) => {
-                    if (e.target.value.length === 0) e.target.value = "0";
+                    if (e.target.value.length === 0) e.target.value = numberMin.toString();
                     e.target.value = Math.floor(Number.parseInt(e.target.value)).toString();
                     numberOnChangeHandler(e);
                 }}
