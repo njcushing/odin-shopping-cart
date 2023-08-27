@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './ShopItemCard.module.css';
 
 import IntegerInput from '../IntegerInput/IntegerInput';
+import Button from '../Button/Button';
 
 const ShopItemCard = ({
     itemInformation,
@@ -17,11 +18,17 @@ const ShopItemCard = ({
             integer={quantity}
             integerMin={itemInformation.quantityMin}
             integerMax={itemInformation.quantityMax}
-            integerOnChangeHandler={(e) => {
+            onChangeHandler={(e) => {
                 setQuantity(Math.floor(Number.parseInt(e.target.value)));
             }}
         />
-        <div></div>
+        <Button
+            text="Add to Cart"
+            colour="gold"
+            onClickHandler={() => {
+
+            }}
+        />
         </div>
     )
 };
