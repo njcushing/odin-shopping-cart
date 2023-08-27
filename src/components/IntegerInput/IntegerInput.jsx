@@ -44,9 +44,9 @@ const IntegerInput = ({
 
 IntegerInput.propTypes = {
     label: PropTypes.string,
-    integer: PropTypes.integer,
-    integerMin: PropTypes.integer,
-    integerMax: PropTypes.integer,
+    integer: PropTypes.number,
+    integerMin: PropTypes.number,
+    integerMax: PropTypes.number,
     onChangeHandler: PropTypes.func,
     width: PropTypes.string,
     outlined: PropTypes.bool,
