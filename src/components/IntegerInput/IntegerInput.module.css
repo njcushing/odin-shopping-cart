@@ -33,10 +33,10 @@
 }
 
 .input:hover {
-    border: 0.16rem solid rgb(235, 235, 235);
-    background-color: rgb(235, 235, 235);
+    border: 0.16rem solid rgb(243, 243, 243);
+    background-color: rgb(243, 243, 243);
 }
 .input-outlined:hover {
     border: 0.16rem solid rgb(44, 44, 44);
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(243, 243, 243);
 }
