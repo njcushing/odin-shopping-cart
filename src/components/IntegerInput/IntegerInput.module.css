@@ -1,6 +1,10 @@
 .label {
     display: flex;
+    align-items: center;
     gap: 0.5rem;
+    color: black;
+    font-weight: bold;
+    font-size: 0.75rem;
 }
 
 .input,
