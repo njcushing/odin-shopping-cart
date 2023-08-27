@@ -3,11 +3,36 @@
     gap: 0.5rem;
 }
 
-.input {
+.input,
+.input-outlined {
     font-size: 1rem;
-    height: 1rem;
+    height: 0.8rem;
     width: 100%;
+    outline: none;
     border-radius: 0.8rem;
     padding: 0.2rem 0.4rem;
-    border: 1px solid white;
+    background-color: white;
+}
+
+.input {
+    border: 0.16rem solid white;
+}
+.input-outlined {
+    border: 0.16rem solid rgb(44, 44, 44);
+}
+
+.input:focus {
+    border: 0.16rem solid white;
+}
+.input-outlined:focus {
+    border: 0.16rem solid rgb(44, 44, 44);
+}
+
+.input:hover {
+    border: 0.16rem solid rgb(235, 235, 235);
+    background-color: rgb(235, 235, 235);
+}
+.input-outlined:hover {
+    border: 0.16rem solid rgb(44, 44, 44);
+    background-color: rgb(235, 235, 235);
 }

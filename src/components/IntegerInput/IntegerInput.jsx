@@ -26,7 +26,7 @@ const IntegerInput = ({
                     type="number"
                     min={integerMin}
                     max={integerMax}
-                    className={styles["input"]}
+                    className={styles[`${outlined ? 'input-outlined' : 'input'}`]}
                     value={integer}
                     onKeyDown={(e) => {
                         if (e.key === '.') e.preventDefault();
@@ -36,7 +36,6 @@ const IntegerInput = ({
                         e.target.value = Math.floor(Number.parseInt(e.target.value)).toString();
                         onChangeHandler(e);
                     }}
-                    style={{ outline: outlined ? "2px solid black" : "" }}
                 ></input>
             </label>
         </div>
@@ -60,7 +59,7 @@ IntegerInput.defaultProps = {
     integerMax: 0,
     onChangeHandler: () => {},
     width: "auto",
-    outlined: true,
+    outlined: false,
 }
 
 export default IntegerInput;
