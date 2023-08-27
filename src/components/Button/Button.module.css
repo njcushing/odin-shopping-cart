@@ -31,9 +31,14 @@
 .orange                     { composes: Button; composes: colours-orange; }
 
 .colours-gold               { background-color: #df9d24; }
-.colours-gold:hover         { background-color: #ecc825; }
-.colours-gold:active        { background-color: #d1af15; }
+.colours-gold:hover         { background-color: #ebb728; }
+.colours-gold:active        { background-color: #ce8d14; }
 .gold                       { composes: Button; composes: colours-gold; }
+
+.colours-yellow             { background-color: #e2bc10; }
+.colours-yellow:hover       { background-color: #f8d63f; }
+.colours-yellow:active      { background-color: #c7a50e; }
+.yellow                     { composes: Button; composes: colours-yellow; }
 
 .colours-limegreen          { background-color: #31c22c; }
 .colours-limegreen:hover    { background-color: #4bdb46; }

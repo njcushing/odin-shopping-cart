@@ -27,6 +27,7 @@ Button.propTypes = {
         "red",
         "orange",
         "gold",
+        "yellow",
         "limegreen",
         "green",
         "darkgreen",
