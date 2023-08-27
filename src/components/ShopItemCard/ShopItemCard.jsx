@@ -10,17 +10,19 @@ const ShopItemCard = ({
     const [quantity, setQuantity] = useState(0);
 
     return (
-        <>
+        <div className={styles["ShopItemCard"]}>
+        <div></div>
         <IntegerInput
             label="Quantity: "
-            number={quantity}
-            numberMin={itemInformation.quantityMin}
-            numberMax={itemInformation.quantityMax}
-            numberOnChangeHandler={(e) => {
+            integer={quantity}
+            integerMin={itemInformation.quantityMin}
+            integerMax={itemInformation.quantityMax}
+            integerOnChangeHandler={(e) => {
                 setQuantity(Math.floor(Number.parseInt(e.target.value)));
             }}
         />
-        </>
+        <div></div>
+        </div>
     )
 };
 

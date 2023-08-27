@@ -1,0 +1,13 @@
+.ShopItemCard {
+    width: 16rem;
+    height: 24rem;
+    border-radius: 1.0rem;
+    border: 1px solid white;
+
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    gap: 0.8rem;
+
+    box-sizing: border-box; /* Prevent padding from making container larger than defined width + height */
+    padding: 0.5rem;
+}
