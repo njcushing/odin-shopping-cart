@@ -4,13 +4,14 @@ import styles from './Button.module.css';
 
 const Button = ({
     text,
+    colour,
     onClickHandler,
     width,
     enabled,
 }) => {
     return (
         <button
-            className={styles["Button"]}
+            className={styles[colour]}
             style={{ width: width }}
             onClick={onClickHandler}
             disabled={!enabled}
@@ -21,6 +22,9 @@ const Button = ({
 
 Button.propTypes = {
     text: PropTypes.string,
+    colour: PropTypes.oneOf([
+        "green",
+    ]),
     onClickHandler: PropTypes.func,
     width: PropTypes.string,
     enabled: PropTypes.bool,
@@ -28,6 +32,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
     text: "Button",
+    colour: "green",
     onClickHandler: () => {},
     width: "auto",
     enabled: true,

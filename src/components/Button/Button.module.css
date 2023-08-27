@@ -6,19 +6,31 @@
     border: none;
     border-radius: 0.8rem;
     color: rgb(255, 255, 255);
-    background-color: #31c22c;
     font-size: 1rem;
     font-weight: bold;
 }
 
-.Button:hover {
-    background-color: #4bdb46;
-}
-
-.Button:active {
-    background-color: #23aa1f;
-}
-
 .Button:disabled {
+    color: #444444;
     background-color: #afafaf;
 }
+
+.colours-red                { background-color: #e73333; }
+.colours-red:hover          { background-color: #f54e4e; }
+.colours-red:active         { background-color: #c51717; }
+.red                        { composes: Button; composes: colours-red; }
+
+.colours-gold               { background-color: #df9d24; }
+.colours-gold:hover         { background-color: #ecc825; }
+.colours-gold:active        { background-color: #d1af15; }
+.gold                       { composes: Button; composes: colours-gold; }
+
+.colours-green              { background-color: #31c22c; }
+.colours-green:hover        { background-color: #4bdb46; }
+.colours-green:active       { background-color: #23aa1f; }
+.green                      { composes: Button; composes: colours-green; }
+
+.colours-blue               { background-color: #1ec4cf; }
+.colours-blue:hover         { background-color: #31d9e6; }
+.colours-blue:active        { background-color: #10afbb; }
+.blue                       { composes: Button; composes: colours-blue; }
