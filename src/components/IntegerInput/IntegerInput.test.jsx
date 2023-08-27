@@ -40,7 +40,7 @@ describe("Prop testing...", () => {
             const user = userEvent.setup();
             const callback = vi.fn((e) => e.target.value);
             
-            render(<IntegerInput integer={0} integerMin={0} integerMax={10} integerOnChangeHandler={callback} />);
+            render(<IntegerInput integer={0} integerMin={0} integerMax={10} onChangeHandler={callback} />);
             const integerInput = screen.getByRole("spinbutton", { name: /Number:/i });
 
             await user.type(integerInput, "5");

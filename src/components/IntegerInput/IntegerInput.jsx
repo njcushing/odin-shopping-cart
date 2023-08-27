@@ -7,8 +7,9 @@ const IntegerInput = ({
     integer,
     integerMin,
     integerMax,
-    integerOnChangeHandler,
+    onChangeHandler,
     width,
+    outlined,
 }) => {
     integerMin = Math.floor(Math.max(Math.min(integerMin, integerMax), 0));
     integerMax = Math.floor(Math.min(Math.max(integerMax, integerMin), Number.MAX_SAFE_INTEGER));
@@ -33,8 +34,9 @@ const IntegerInput = ({
                     onChange={(e) => {
                         if (e.target.value.length === 0) e.target.value = integerMin.toString();
                         e.target.value = Math.floor(Number.parseInt(e.target.value)).toString();
-                        integerOnChangeHandler(e);
+                        onChangeHandler(e);
                     }}
+                    style={{ outline: outlined ? "2px solid black" : "" }}
                 ></input>
             </label>
         </div>
@@ -46,8 +48,9 @@ IntegerInput.propTypes = {
     integer: PropTypes.integer,
     integerMin: PropTypes.integer,
     integerMax: PropTypes.integer,
-    integerOnChangeHandler: PropTypes.func,
+    onChangeHandler: PropTypes.func,
     width: PropTypes.string,
+    outlined: PropTypes.bool,
 }
 
 IntegerInput.defaultProps = {
@@ -55,8 +58,9 @@ IntegerInput.defaultProps = {
     integer: 0,
     integerMin: 0,
     integerMax: 0,
-    integerOnChangeHandler: () => {},
+    onChangeHandler: () => {},
     width: "auto",
+    outlined: true,
 }
 
 export default IntegerInput;
