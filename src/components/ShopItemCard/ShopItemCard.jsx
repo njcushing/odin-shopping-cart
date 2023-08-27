@@ -20,7 +20,8 @@ const ShopItemCard = ({
 
     return (
         <div className={styles["ShopItemCard"]}>
-        <div></div>
+        <div className={styles["item-name"]}>{itemInformation.name}</div>
+        <div className={styles["images-container"]}></div>
         <div className={styles["pricing-container"]}>
             <div className={styles["original-price"]}>
                 {itemInformation.originalPrice !== itemInformation.currentPrice && originalPriceString}
@@ -55,6 +56,7 @@ const ShopItemCard = ({
 
 ShopItemCard.propTypes = {
     itemInformation: PropTypes.shape({
+        name: PropTypes.string.isRequired,
         originalPrice: PropTypes.number.isRequired,
         currentPrice: PropTypes.number.isRequired,
         quantityMin: PropTypes.number.isRequired,
@@ -64,6 +66,7 @@ ShopItemCard.propTypes = {
 
 ShopItemCard.defaultProps = {
     itemInformation: PropTypes.shape({
+        name: "Item Information Not Found",
         originalPrice: 0,
         currentPrice: 0,
         quantityMin: 0,
