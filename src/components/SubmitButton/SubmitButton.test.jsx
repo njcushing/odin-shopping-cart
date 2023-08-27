@@ -10,4 +10,15 @@ describe("DOM Testing...", () => {
         const submitButton = screen.getByRole("button", { name: /Submit/i });
         expect(submitButton).toBeInTheDocument();
     });
+    test("On click, the button element should invoke the provided callback function", async () => {
+        const user = userEvent.setup();
+        const callback = vi.fn();
+        
+        render(<SubmitButton onClickHandler={callback} />);
+        const submitButton = screen.getByRole("button", { name: /Submit/i });
+
+        await user.click(submitButton);
+
+        expect(callback).toHaveBeenCalled();
+    })
 });
