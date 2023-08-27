@@ -1,0 +1,24 @@
+.Button {
+    height: 1.6rem;
+    width: 4rem;
+    top: -0.8rem;
+    right: 1rem;
+    border: none;
+    border-radius: 0.8rem;
+    color: rgb(255, 255, 255);
+    background-color: #31c22c;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.Button:hover {
+    background-color: #4bdb46;
+}
+
+.Button:active {
+    background-color: #23aa1f;
+}
+
+.Button:disabled {
+    background-color: #afafaf;
+}
