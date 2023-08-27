@@ -4,53 +4,59 @@ import styles from './IntegerInput.module.css';
 
 const IntegerInput = ({
     label,
-    number,
-    numberMin,
-    numberMax,
-    numberOnChangeHandler,
+    integer,
+    integerMin,
+    integerMax,
+    integerOnChangeHandler,
+    width,
 }) => {
-    numberMin = Math.floor(Math.max(Math.min(numberMin, numberMax), 0));
-    numberMax = Math.floor(Math.min(Math.max(numberMax, numberMin), Number.MAX_SAFE_INTEGER));
+    integerMin = Math.floor(Math.max(Math.min(integerMin, integerMax), 0));
+    integerMax = Math.floor(Math.min(Math.max(integerMax, integerMin), Number.MAX_SAFE_INTEGER));
 
-    number = Math.floor(Math.max(Math.min(number, numberMax), numberMin));
+    integer = Math.floor(Math.max(Math.min(integer, integerMax), integerMin));
 
     return (
-        <>
-        <label>{label}
-            <input
-                type="number"
-                min={numberMin}
-                max={numberMax}
-                className={styles["number-input"]}
-                value={number}
-                onKeyDown={(e) => {
-                    if (e.key === '.') e.preventDefault();
-                }}
-                onChange={(e) => {
-                    if (e.target.value.length === 0) e.target.value = numberMin.toString();
-                    e.target.value = Math.floor(Number.parseInt(e.target.value)).toString();
-                    numberOnChangeHandler(e);
-                }}
-            ></input>
-        </label>
-        </>
+        <div className={styles["IntegerInput"]}>
+            <label
+                className={styles["label"]}
+                style={{ width: width }}
+            >{label}
+                <input
+                    type="number"
+                    min={integerMin}
+                    max={integerMax}
+                    className={styles["input"]}
+                    value={integer}
+                    onKeyDown={(e) => {
+                        if (e.key === '.') e.preventDefault();
+                    }}
+                    onChange={(e) => {
+                        if (e.target.value.length === 0) e.target.value = integerMin.toString();
+                        e.target.value = Math.floor(Number.parseInt(e.target.value)).toString();
+                        integerOnChangeHandler(e);
+                    }}
+                ></input>
+            </label>
+        </div>
     )
 };
 
 IntegerInput.propTypes = {
     label: PropTypes.string,
-    number: PropTypes.number,
-    numberMin: PropTypes.number,
-    numberMax: PropTypes.number,
-    numberOnChangeHandler: PropTypes.func,
+    integer: PropTypes.integer,
+    integerMin: PropTypes.integer,
+    integerMax: PropTypes.integer,
+    integerOnChangeHandler: PropTypes.func,
+    width: PropTypes.string,
 }
 
 IntegerInput.defaultProps = {
     label: "Number: ",
-    number: 0,
-    numberMin: 0,
-    numberMax: 0,
-    numberOnChangeHandler: () => {},
+    integer: 0,
+    integerMin: 0,
+    integerMax: 0,
+    integerOnChangeHandler: () => {},
+    width: "auto",
 }
 
 export default IntegerInput;
