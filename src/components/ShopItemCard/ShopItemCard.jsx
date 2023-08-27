@@ -21,6 +21,7 @@ const ShopItemCard = ({
             onChangeHandler={(e) => {
                 setQuantity(Math.floor(Number.parseInt(e.target.value)));
             }}
+            outlined={true}
         />
         <Button
             text="Add to Cart"
