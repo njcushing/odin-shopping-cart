@@ -15,10 +15,20 @@
     background-color: #afafaf;
 }
 
+.colours-pink                { background-color: #dd80c6; }
+.colours-pink:hover          { background-color: #ee9cd9; }
+.colours-pink:active         { background-color: #c063a9; }
+.pink                        { composes: Button; composes: colours-pink; }
+
 .colours-red                { background-color: #e73333; }
 .colours-red:hover          { background-color: #f54e4e; }
 .colours-red:active         { background-color: #c51717; }
 .red                        { composes: Button; composes: colours-red; }
+
+.colours-orange             { background-color: #e28214; }
+.colours-orange:hover       { background-color: #ee942d; }
+.colours-orange:active      { background-color: #c96e06; }
+.orange                     { composes: Button; composes: colours-orange; }
 
 .colours-gold               { background-color: #df9d24; }
 .colours-gold:hover         { background-color: #ecc825; }
@@ -30,7 +40,67 @@
 .colours-limegreen:active   { background-color: #23aa1f; }
 .limegreen                  { composes: Button; composes: colours-limegreen; }
 
+.colours-green              { background-color: #147e22; }
+.colours-green:hover        { background-color: #259934; }
+.colours-green:active       { background-color: #0c5f17; }
+.green                      { composes: Button; composes: colours-green; }
+
+.colours-darkgreen          { background-color: #094e12; }
+.colours-darkgreen:hover    { background-color: #0e5f19; }
+.colours-darkgreen:active   { background-color: #053a0c; }
+.darkgreen                  { composes: Button; composes: colours-darkgreen; }
+
 .colours-lightblue          { background-color: #1ec4cf; }
 .colours-lightblue:hover    { background-color: #31d9e6; }
 .colours-lightblue:active   { background-color: #10afbb; }
 .lightblue                  { composes: Button; composes: colours-lightblue; }
+
+.colours-blue               { background-color: #1e71cf; }
+.colours-blue:hover         { background-color: #3485e2; }
+.colours-blue:active        { background-color: #0f5aaf; }
+.blue                       { composes: Button; composes: colours-blue; }
+
+.colours-darkblue           { background-color: #1e21cf; }
+.colours-darkblue:hover     { background-color: #3336eb; }
+.colours-darkblue:active    { background-color: #1215b3; }
+.darkblue                   { composes: Button; composes: colours-darkblue; }
+
+.colours-indigo             { background-color: #240592; }
+.colours-indigo:hover       { background-color: #3d14af; }
+.colours-indigo:active      { background-color: #18027a; }
+.indigo                     { composes: Button; composes: colours-indigo; }
+
+.colours-purple             { background-color: #610ece; }
+.colours-purple:hover       { background-color: #7321dd; }
+.colours-purple:active      { background-color: #5207b4; }
+.purple                     { composes: Button; composes: colours-purple; }
+
+.colours-lightbrown         { background-color: #b5651d; }
+.colours-lightbrown:hover   { background-color: #c27939; }
+.colours-lightbrown:active  { background-color: #9e5414; }
+.lightbrown                 { composes: Button; composes: colours-lightbrown; }
+
+.colours-brown              { background-color: #683508; }
+.colours-brown:hover        { background-color: #854711; }
+.colours-brown:active       { background-color: #522804; }
+.brown                      { composes: Button; composes: colours-brown; }
+
+.colours-lightgrey          { background-color: #c7c7c7; }
+.colours-lightgrey:hover    { background-color: #dddddd; }
+.colours-lightgrey:active   { background-color: #a7a7a7; }
+.lightgrey                  { composes: Button; composes: colours-lightgrey; color: rgb(73, 73, 73); }
+
+.colours-grey               { background-color: #747474; }
+.colours-grey:hover         { background-color: #8b8b8b; }
+.colours-grey:active        { background-color: #555555; }
+.grey                       { composes: Button; composes: colours-grey; }
+
+.colours-darkgrey           { background-color: #414141; }
+.colours-darkgrey:hover     { background-color: #585858; }
+.colours-darkgrey:active    { background-color: #2e2e2e; }
+.darkgrey                   { composes: Button; composes: colours-darkgrey; }
+
+.colours-black              { background-color: #111111; }
+.colours-black:hover        { background-color: #1b1b1b; }
+.colours-black:active       { background-color: #000000; }
+.black                      { composes: Button; composes: colours-black; }
