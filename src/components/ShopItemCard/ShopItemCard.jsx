@@ -10,9 +10,28 @@ const ShopItemCard = ({
 }) => {
     const [quantity, setQuantity] = useState(0);
 
+    const currencyFormatter = new Intl.NumberFormat('en-uk', {
+        style: 'currency',
+        currency: 'GBP',
+    })
+    const originalPriceString = currencyFormatter.format(itemInformation.originalPrice / 100);
+    const currentPriceString = currencyFormatter.format(itemInformation.currentPrice / 100);
+    const discountPercentageString = `-${((1 - (itemInformation.currentPrice / itemInformation.originalPrice)) * 100).toFixed(0)}%`;
+
     return (
         <div className={styles["ShopItemCard"]}>
         <div></div>
+        <div className={styles["pricing-container"]}>
+            <div className={styles["original-price"]}>
+                {itemInformation.originalPrice !== itemInformation.currentPrice && originalPriceString}
+            </div>
+            <div className={styles["current-price"]}>
+                {currentPriceString}
+            </div>
+            <div className={styles["discount-percentage"]}>
+                {itemInformation.originalPrice !== itemInformation.currentPrice && discountPercentageString}
+            </div>
+        </div>
         <IntegerInput
             label="Quantity: "
             integer={quantity}
@@ -36,13 +55,17 @@ const ShopItemCard = ({
 
 ShopItemCard.propTypes = {
     itemInformation: PropTypes.shape({
-        quantityMin: PropTypes.number,
-        quantityMax: PropTypes.number,
+        originalPrice: PropTypes.number.isRequired,
+        currentPrice: PropTypes.number.isRequired,
+        quantityMin: PropTypes.number.isRequired,
+        quantityMax: PropTypes.number.isRequired,
     }).isRequired,
 }
 
 ShopItemCard.defaultProps = {
     itemInformation: PropTypes.shape({
+        originalPrice: 0,
+        currentPrice: 0,
         quantityMin: 0,
         quantityMax: 0,
     }),
