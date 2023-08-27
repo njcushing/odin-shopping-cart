@@ -23,7 +23,10 @@ const Button = ({
 Button.propTypes = {
     text: PropTypes.string,
     colour: PropTypes.oneOf([
-        "green",
+        "red",
+        "gold",
+        "limegreen",
+        "lightblue",
     ]),
     onClickHandler: PropTypes.func,
     width: PropTypes.string,
@@ -32,7 +35,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
     text: "Button",
-    colour: "green",
+    colour: "limegreen",
     onClickHandler: () => {},
     width: "auto",
     enabled: true,

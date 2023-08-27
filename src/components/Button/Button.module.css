@@ -25,12 +25,12 @@
 .colours-gold:active        { background-color: #d1af15; }
 .gold                       { composes: Button; composes: colours-gold; }
 
-.colours-green              { background-color: #31c22c; }
-.colours-green:hover        { background-color: #4bdb46; }
-.colours-green:active       { background-color: #23aa1f; }
-.green                      { composes: Button; composes: colours-green; }
+.colours-limegreen          { background-color: #31c22c; }
+.colours-limegreen:hover    { background-color: #4bdb46; }
+.colours-limegreen:active   { background-color: #23aa1f; }
+.limegreen                  { composes: Button; composes: colours-limegreen; }
 
-.colours-blue               { background-color: #1ec4cf; }
-.colours-blue:hover         { background-color: #31d9e6; }
-.colours-blue:active        { background-color: #10afbb; }
-.blue                       { composes: Button; composes: colours-blue; }
+.colours-lightblue          { background-color: #1ec4cf; }
+.colours-lightblue:hover    { background-color: #31d9e6; }
+.colours-lightblue:active   { background-color: #10afbb; }
+.lightblue                  { composes: Button; composes: colours-lightblue; }
