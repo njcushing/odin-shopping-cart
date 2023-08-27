@@ -20,5 +20,5 @@ describe("DOM Testing...", () => {
         await user.click(submitButton);
 
         expect(callback).toHaveBeenCalled();
-    })
+    });
 });
