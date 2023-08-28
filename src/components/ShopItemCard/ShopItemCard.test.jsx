@@ -23,22 +23,35 @@ vi.mock('./../IntegerInput/IntegerInput.jsx', () => ({
 }));
 
 describe("UI/DOM Testing...", () => {
+    describe("The item name element...", () => {
+        test(`Should have textContent equal to the provided itemInformation.name
+         value`, () => {
+            render(<ShopItemCard itemInformation={mockItemInformation} />);
+            expect(screen.getByRole("heading", { name: /Shop Item/i })).toBeInTheDocument();
+        });
+    });
     describe("The original-price element...", () => {
-        test("Should have no textContent if the values of originalPrice and currentPrice are equal", () => {
+        test(`Should have no textContent if the values of
+         itemInformation.originalPrice and itemInformation.currentPrice are
+         equal`, () => {
             render(<ShopItemCard itemInformation={mockItemInformation} />);
             const ele = screen.getByRole("generic", { name: /original-price/i });
             expect(ele.textContent).toBe("");
         });
     });
     describe("The current-price element...", () => {
-        test("Should have textContent equal to the value of currentPrice converted to GBP in the format: £AA.BB", () => {
+        test(`Should have textContent equal to the value of
+         itemInformation.currentPrice converted to GBP in the format: £AA.BB`,
+        () => {
             render(<ShopItemCard itemInformation={mockItemInformation} />);
             const ele = screen.getByRole("generic", { name: /current-price/i });
             expect(ele.textContent).toBe("£15.00");
         });
     });
     describe("The discount-percentage element...", () => {
-        test("Should have no textContent if the values of originalPrice and currentPrice are equal", () => {
+        test(`Should have no textContent if the values of
+         itemInformation.originalPrice and itemInformation.currentPrice are
+         equal`, () => {
             render(<ShopItemCard itemInformation={mockItemInformation} />);
             const ele = screen.getByRole("generic", { name: /discount-percentage/i });
             expect(ele.textContent).toBe("");

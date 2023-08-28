@@ -20,7 +20,7 @@ const ShopItemCard = ({
 
     return (
         <div className={styles["ShopItemCard"]}>
-        <div className={styles["item-name"]}>{itemInformation.name}</div>
+        <h4 className={styles["item-name"]}>{itemInformation.name}</h4>
         <div className={styles["images-container"]}></div>
         <div className={styles["pricing-container"]}>
             <div className={styles["original-price"]} aria-label="original-price">
