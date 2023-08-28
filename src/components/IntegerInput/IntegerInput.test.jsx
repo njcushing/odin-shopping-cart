@@ -31,7 +31,8 @@ describe("UI/DOM Testing...", () => {
             const integerInput = screen.getByRole("spinbutton", { name: /Number:/i });
             expect(integerInput.value).toBe("10");
         });
-        test("Should call the event handler callback function when the value is changed in the input", async () => {
+        test(`Should call the event handler callback function when the value is
+         changed in the input`, async () => {
             const user = userEvent.setup();
             const callback = vi.fn((e) => e.target.value);
             

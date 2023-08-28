@@ -6,7 +6,8 @@ import Button from './Button.jsx'
 
 describe("UI/DOM Testing...", () => {
     describe("The button element...", () => {
-        test("Should have the same textContent as the provided 'text' prop's value", () => {
+        test(`Should have the same textContent as the provided 'text' prop's
+         value`, () => {
             render(<Button text="Example" />);
             const button = screen.getByRole("button", { name: /Example/i });
             expect(button).toBeInTheDocument();
