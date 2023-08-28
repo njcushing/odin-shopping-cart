@@ -19,24 +19,24 @@
 }
 
 .input {
-    border: 0.16rem solid white;
+    border: 0.14rem solid white;
 }
 .input-outlined {
-    border: 0.16rem solid rgb(44, 44, 44);
+    border: 0.14rem solid rgb(44, 44, 44);
 }
 
 .input:focus {
-    border: 0.16rem solid white;
+    border: 0.14rem solid white;
 }
 .input-outlined:focus {
-    border: 0.16rem solid rgb(44, 44, 44);
+    border: 0.14rem solid rgb(44, 44, 44);
 }
 
 .input:hover {
-    border: 0.16rem solid rgb(243, 243, 243);
+    border: 0.14rem solid rgb(243, 243, 243);
     background-color: rgb(243, 243, 243);
 }
 .input-outlined:hover {
-    border: 0.16rem solid rgb(44, 44, 44);
+    border: 0.14rem solid rgb(44, 44, 44);
     background-color: rgb(243, 243, 243);
 }
