@@ -23,13 +23,13 @@ const ShopItemCard = ({
         <div className={styles["item-name"]}>{itemInformation.name}</div>
         <div className={styles["images-container"]}></div>
         <div className={styles["pricing-container"]}>
-            <div className={styles["original-price"]}>
+            <div className={styles["original-price"]} aria-label="original-price">
                 {itemInformation.originalPrice !== itemInformation.currentPrice && originalPriceString}
             </div>
-            <div className={styles["current-price"]}>
+            <div className={styles["current-price"]} aria-label="current-price">
                 {currentPriceString}
             </div>
-            <div className={styles["discount-percentage"]}>
+            <div className={styles["discount-percentage"]} aria-label="discount-percentage">
                 {itemInformation.originalPrice !== itemInformation.currentPrice && discountPercentageString}
             </div>
         </div>
