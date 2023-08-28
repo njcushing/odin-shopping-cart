@@ -4,13 +4,8 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import IntegerInput from './IntegerInput.jsx'
 
-describe("Prop testing...", () => {
-    describe("The 'integer' prop...", () => {
-        test("Should have an input element rendered for it", () => {
-            render(<IntegerInput label={"Number:"} />);
-            const integerInput = screen.getByRole("spinbutton", { name: /Number:/i });
-            expect(integerInput).toBeInTheDocument();
-        });
+describe("UI/DOM Testing...", () => {
+    describe("The input element for the 'integer' prop...", () => {
         test("Should have a default value of 0", () => {
             render(<IntegerInput />);
             const integerInput = screen.getByRole("spinbutton", { name: /Number:/i });
