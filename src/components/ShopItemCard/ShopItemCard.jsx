@@ -10,16 +10,18 @@ const ShopItemCard = ({
 }) => {
     const [quantity, setQuantity] = useState(0);
     const [image, setImage] = useState("");
+    const [error, setError] = useState(null);
 
     const previousImage = useRef(itemInformation.imageUrl);
 
     useEffect(() => {
-        const fetchImage = async () => {
-            const response = await fetch(itemInformation.imageUrl, { mode: 'cors' });
-            if (response.status >= 400) throw new Error(`${itemInformation.imageUrl} is not a link to a valid image.`);
-            setImage(response.url);
-        }
-        fetchImage();
+        fetch(itemInformation.imageUrl, { mode: 'cors' })
+            .then((response) => { if (response.status >= 400) throw new
+                Error(`itemInformation.imageUrl} is not a link to a valid image.`);
+                return response; 
+            })
+            .then((response) => setImage(response.url))
+            .catch((error) => { setError(error) });
     }, [itemInformation.imageUrl]);
 
     const currencyFormatter = new Intl.NumberFormat('en-uk', {
