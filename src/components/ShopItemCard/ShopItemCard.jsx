@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ShopItemCard.module.css';
 
@@ -9,6 +9,18 @@ const ShopItemCard = ({
     itemInformation,
 }) => {
     const [quantity, setQuantity] = useState(0);
+    const [image, setImage] = useState("");
+
+    const previousImage = useRef(itemInformation.imageUrl);
+
+    useEffect(() => {
+        const fetchImage = async () => {
+            const response = await fetch(itemInformation.imageUrl, { mode: 'cors' });
+            if (response.status >= 400) throw new Error(`${itemInformation.imageUrl} is not a link to a valid image.`);
+            setImage(response.url);
+        }
+        fetchImage();
+    }, [itemInformation.imageUrl]);
 
     const currencyFormatter = new Intl.NumberFormat('en-uk', {
         style: 'currency',
@@ -21,7 +33,7 @@ const ShopItemCard = ({
     return (
         <div className={styles["ShopItemCard"]}>
         <h4 className={styles["item-name"]}>{itemInformation.name}</h4>
-        <div className={styles["images-container"]}></div>
+        <img className={styles["item-image"]} src={image} alt={itemInformation.name}></img>
         <div className={styles["pricing-container"]}>
             <div className={styles["original-price"]} aria-label="original-price">
                 {itemInformation.originalPrice !== itemInformation.currentPrice && originalPriceString}
@@ -57,6 +69,7 @@ const ShopItemCard = ({
 ShopItemCard.propTypes = {
     itemInformation: PropTypes.shape({
         name: PropTypes.string.isRequired,
+        imageUrl: PropTypes.string.isRequired,
         originalPrice: PropTypes.number.isRequired,
         currentPrice: PropTypes.number.isRequired,
         quantityMin: PropTypes.number.isRequired,
@@ -67,6 +80,7 @@ ShopItemCard.propTypes = {
 ShopItemCard.defaultProps = {
     itemInformation: PropTypes.shape({
         name: "Item Information Not Found",
+        imageUrl: "",
         originalPrice: 0,
         currentPrice: 0,
         quantityMin: 0,

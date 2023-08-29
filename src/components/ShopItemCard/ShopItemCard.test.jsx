@@ -6,6 +6,7 @@ import ShopItemCard from './ShopItemCard.jsx'
 
 const mockItemInformation = { /* Do not change existing fields, only add new ones */
     name: "Shop Item",
+    imageUrl: "",
     originalPrice: 1500,
     currentPrice: 1500,
     quantityMin: 0,
@@ -28,6 +29,13 @@ describe("UI/DOM Testing...", () => {
          value`, () => {
             render(<ShopItemCard itemInformation={mockItemInformation} />);
             expect(screen.getByRole("heading", { name: /Shop Item/i })).toBeInTheDocument();
+        });
+    });
+    describe("The item image element...", () => {
+        test(`Should have a 'src' attribute with value equal to the
+           itemInformation.imageUrl prop's value`, () => {
+            render(<ShopItemCard itemInformation={mockItemInformation} />);
+            expect(screen.getByRole("img", { name: mockItemInformation.name })).toBeInTheDocument();
         });
     });
     describe("The original-price element...", () => {
