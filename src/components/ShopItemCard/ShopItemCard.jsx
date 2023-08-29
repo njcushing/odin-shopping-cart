@@ -28,7 +28,9 @@ const ShopItemCard = ({
     })
     const originalPriceString = currencyFormatter.format(itemInformation.originalPrice / 100);
     const currentPriceString = currencyFormatter.format(itemInformation.currentPrice / 100);
-    const discountPercentageString = `-${((1 - (itemInformation.currentPrice / itemInformation.originalPrice)) * 100).toFixed(0)}%`;
+    const discountPercentageString = itemInformation.currentPrice !== 0
+    ? `-${((1 - (itemInformation.currentPrice / itemInformation.originalPrice)) * 100).toFixed(0)}%`
+    : "FREE";
 
     return (
         <div className={styles["ShopItemCard"]}>
