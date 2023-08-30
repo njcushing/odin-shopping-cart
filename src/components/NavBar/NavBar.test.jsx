@@ -4,23 +4,38 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import * as NavBar from './NavBar.jsx'
 
-console.log(NavBar);
-
-const newOption = NavBar.option();
 const mockOptions = [
-    { ...newOption, text: "Option 1", },
-    { ...newOption, text: "Option 2", },
-    { ...newOption, text: "Option 3", },
-    { ...newOption, text: "Option 4", },
-    { ...newOption, text: "Option 5", },
+    { ...NavBar.option(), text: "Option 1", },
+    { ...NavBar.option(), text: "Option 2", },
+    { ...NavBar.option(), text: "Option 3", },
+    { ...NavBar.option(), text: "Option 4", },
+    { ...NavBar.option(), text: "Option 5", },
 ]
 
 describe("UI/DOM testing...", () => {
-    describe("The NavBar button container...", () => {
-        test("Should contain the same number of buttons as options provided", () => {
-            render(<NavBar.Component options={mockOptions} defaultOption="Option 1" />);
-            const ele = screen.getByRole("navigation");
+    describe("The <ul> element containing the NavBar options...", () => {
+        test("Should contain the same number of children as options provided", () => {
+            render(<NavBar.Component
+                ariaLabel={"nav-bar"}
+                options={mockOptions}
+                currentOption="Option 1"
+            />);
+            const ele = screen.getByRole("list", { name: /nav-bar-options/i });
             expect(ele.children.length).toBe(5);
         })
     });
+    describe("An <li> element that represents a NavBar option...", () => {
+        test("Should have textContent equal to the 'text' property for each option", () => {
+            render(<NavBar.Component
+                ariaLabel={"nav-bar"}
+                options={mockOptions}
+                currentOption="Option 1"
+            />);
+            expect(screen.getByText("Option 1")).toBeInTheDocument();
+            expect(screen.getByText("Option 2")).toBeInTheDocument();
+            expect(screen.getByText("Option 3")).toBeInTheDocument();
+            expect(screen.getByText("Option 4")).toBeInTheDocument();
+            expect(screen.getByText("Option 5")).toBeInTheDocument();
+        })
+    })
 });
