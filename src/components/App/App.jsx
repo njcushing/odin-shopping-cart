@@ -11,7 +11,7 @@ const addItemFromAPI = (array, item) => {
         name: item.description,
         imageUrl: item.image,
         originalPrice: (item.price * 100),
-        currentPrice: Math.ceil((item.price * 100) - Math.random((item.price * 100) / 3)),
+        currentPrice: Math.ceil((item.price * 100) - Math.random() * ((item.price * 100) / 3)),
         quantityMin: 0,
         quantityMax: item.rating.count,
     })
