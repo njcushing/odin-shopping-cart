@@ -23,24 +23,22 @@ function App() {
 
     useEffect(() => {
         let itemsNew = [];
-        (() => {
-            fetch(Url, { mode: 'cors' })
-            .then((response) => {
-                if (response.status >= 400) {
-                    throw new Error(`Warning: ${Url} is an invalid call to the Fake Store API`);
+        fetch(Url, { mode: 'cors' })
+        .then((response) => {
+            if (response.status >= 400) {
+                throw new Error(`Warning: ${Url} is an invalid call to the Fake Store API`);
+            }
+            return response.json();
+        })
+        .then((response) => {
+            response.forEach((item) => {
+                if (item.category === category) {
+                    addItemFromAPI(itemsNew, item);
                 }
-                return response.json();
-            })
-            .then((response) => {
-                response.forEach((item) => {
-                    if (item.category === category) {
-                        addItemFromAPI(itemsNew, item);
-                    }
-                });
-                setItems(itemsNew);
-            })
-            .catch((error) => { throw new Error(error) });
-        })();
+            });
+            setItems(itemsNew);
+        })
+        .catch((error) => { throw new Error(error) });
     }, [category]);
 
     return (
