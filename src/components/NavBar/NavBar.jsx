@@ -39,6 +39,11 @@ Component.propTypes = {
         backgroundColour: PropTypes.string,
     })).isRequired,
     currentOption: PropTypes.string,
+    onClickHandler: PropTypes.func,
+}
+
+Component.defaultProps = {
+    onClickHandler: () => {},
 }
 
 export { Component, option };

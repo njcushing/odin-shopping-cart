@@ -13,7 +13,7 @@ const mockOptions = [
 ]
 
 describe("UI/DOM testing...", () => {
-    describe("The <ul> element containing the NavBar options...", () => {
+    describe("The unordered-list (<ul>) element containing the NavBar options...", () => {
         test("Should contain the same number of children as options provided", () => {
             render(<NavBar.Component
                 ariaLabel={"nav-bar"}
@@ -22,9 +22,9 @@ describe("UI/DOM testing...", () => {
             />);
             const ele = screen.getByRole("list", { name: /nav-bar-options/i });
             expect(ele.children.length).toBe(5);
-        })
+        });
     });
-    describe("An <li> element that represents a NavBar option...", () => {
+    describe("A listitem (<li>) element that represents a NavBar option...", () => {
         test("Should have textContent equal to the 'text' property for each option", () => {
             render(<NavBar.Component
                 ariaLabel={"nav-bar"}
@@ -36,6 +36,14 @@ describe("UI/DOM testing...", () => {
             expect(screen.getByText("Option 3")).toBeInTheDocument();
             expect(screen.getByText("Option 4")).toBeInTheDocument();
             expect(screen.getByText("Option 5")).toBeInTheDocument();
-        })
+        });
+        describe("Should invoke the 'onClick' callback function...", () => {
+            test("If the option clicked is not equal to the current one", () => {
+
+            });
+            test("Unless the option clicked is equal to the current one", () => {
+                
+            })
+        });
     })
 });
