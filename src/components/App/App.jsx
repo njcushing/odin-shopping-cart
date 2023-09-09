@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import ShopItemCard from '../ShopItemCard/ShopItemCard';
 import * as NavBar from '../NavBar/NavBar';
 
+let controller;
+
 const Url = 'https://fakestoreapi.com/products';
 const addItemFromAPI = (array, item) => {
     array.push({
@@ -27,7 +29,12 @@ function App() {
     useEffect(() => {
         let itemsNew = [];
         let categoriesNew = new Set();
-        fetch(Url, { mode: 'cors' })
+
+        if (controller) controller.abort();
+        controller = new AbortController();
+        const signal = controller.signal;
+
+        fetch(Url, { mode: 'cors', signal: signal })
         .then((response) => {
             if (response.status >= 400) {
                 throw new Error(`Warning: ${Url} is an invalid call to the Fake Store API`);
@@ -44,7 +51,9 @@ function App() {
             setItems(itemsNew);
             setCategories(categoriesNew);
         })
-        .catch((error) => { throw new Error(error); });
+        .catch((error) => {
+            throw new Error(error);
+        });
     }, [category]);
 
     useEffect(() => {
@@ -52,15 +61,13 @@ function App() {
         optionsNew.push({
             ...NavBar.option(),
             text: "Home",
-            textColour: "black",
-            backgroundColour: "white",
+            colour: "gold",
         });
         categories.forEach((category) => {
             optionsNew.push({
                 ...NavBar.option(),
                 text: category,
-                textColour: "white",
-                backgroundColour: "green",
+                colour: "yellow",
             })
         })
         setOptions(optionsNew);
@@ -68,7 +75,14 @@ function App() {
 
     return (
         <div className={styles["App"]}>
-        <NavBar.Component ariaLabel="item-categories" options={options} />
+        <NavBar.Component
+            ariaLabel="item-categories"
+            options={options}
+            currentOption={category}
+            onClickHandler={(e) => {
+                setCategory(e.target.textContent);
+            }}
+        />
         <div className={styles["item-list"]}>
             {items.map((item) => 
                 <ShopItemCard itemInformation={item} key={item.id} />
