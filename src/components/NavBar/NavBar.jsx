@@ -21,9 +21,16 @@ const Component = ({
     return (
         <>
         <nav className={styles["NavBar"]} aria-label={ariaLabel}>
-            <ul aria-label={"nav-bar-options"}>
+            <ul className={styles["unordered-list"]} aria-label={"nav-bar-options"}>
             {options.map((option) => 
-                <li key={option.id}>{option.text}</li>
+                <li
+                    className={styles["list-item"]}
+                    style={{
+                        color: option.textColour,
+                        backgroundColor: option.backgroundColour,
+                    }}
+                    key={option.id}
+                >{option.text}</li>
             )}
             </ul>
         </nav>
