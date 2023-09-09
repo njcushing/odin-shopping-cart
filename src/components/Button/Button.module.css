@@ -4,108 +4,126 @@
     top: -0.8rem;
     right: 1rem;
     border: none;
-    border-radius: 9999rem;
-    color: rgb(0, 0, 0);
     font-size: 1rem;
     box-shadow: 0px 0.2rem 0.16rem -0px rgba(0, 0, 0, 0.16);
 }
 
-.Button:disabled {
-    color: #444444;
-    background-color: #afafaf;
-}
+.Button:disabled                { color: #444444; background-color: #afafaf; }
+.Button:disabled:hover          { color: #444444; background-color: #afafaf; }
+.Button:disabled:active         { color: #444444; background-color: #afafaf; }
 
-.colours-pink               { background-color: #dd80c6; }
-.colours-pink:hover         { background-color: #ee9cd9; }
-.colours-pink:active        { background-color: #c063a9; }
-.pink                       { composes: Button; composes: colours-pink; color: black; }
+.Button[sel=true]               { font-weight: bold; }
 
-.colours-red                { background-color: #e73333; }
-.colours-red:hover          { background-color: #f54e4e; }
-.colours-red:active         { background-color: #c51717; }
-.red                        { composes: Button; composes: colours-red; color: white; }
+.colours-pink                   { background-color: #dd80c6; }
+.colours-pink:hover             { background-color: #ee9cd9; }
+.colours-pink:active,
+.colours-pink[sel=true]         { background-color: #c063a9; }
+.pink                           { composes: Button; composes: colours-pink; color: black; }
 
-.colours-orange             { background-color: #e28214; }
-.colours-orange:hover       { background-color: #ee942d; }
-.colours-orange:active      { background-color: #c96e06; }
-.orange                     { composes: Button; composes: colours-orange; color: white; }
+.colours-red                    { background-color: #e73333; }
+.colours-red:hover              { background-color: #f54e4e; }
+.colours-red:active,
+.colours-red[sel=true]          { background-color: #c51717; }
+.red                            { composes: Button; composes: colours-red; color: white; }
 
-.colours-gold               { background-color: #df9d24; }
-.colours-gold:hover         { background-color: #ebb728; }
-.colours-gold:active        { background-color: #ce8d14; }
-.gold                       { composes: Button; composes: colours-gold; color: black; }
+.colours-orange                 { background-color: #e28214; }
+.colours-orange:hover           { background-color: #ee942d; }
+.colours-orange:active,
+.colours-orange[sel=true]       { background-color: #c96e06; }
+.orange                         { composes: Button; composes: colours-orange; color: white; }
 
-.colours-yellow             { background-color: #e2bc10; }
-.colours-yellow:hover       { background-color: #f8d63f; }
-.colours-yellow:active      { background-color: #c7a50e; }
-.yellow                     { composes: Button; composes: colours-yellow; color: black; }
+.colours-gold                   { background-color: #df9d24; }
+.colours-gold:hover             { background-color: #ebb728; }
+.colours-gold:active,
+.colours-gold[sel=true]         { background-color: #ce8d14; }
+.gold                           { composes: Button; composes: colours-gold; color: black; }
 
-.colours-limegreen          { background-color: #31c22c; }
-.colours-limegreen:hover    { background-color: #4bdb46; }
-.colours-limegreen:active   { background-color: #23aa1f; }
-.limegreen                  { composes: Button; composes: colours-limegreen; color: black; }
+.colours-yellow                 { background-color: #e2bc10; }
+.colours-yellow:hover           { background-color: #f8d63f; }
+.colours-yellow:active,
+.colours-yellow[sel=true]       { background-color: #c7a50e; }
+.yellow                         { composes: Button; composes: colours-yellow; color: black; }
 
-.colours-green              { background-color: #147e22; }
-.colours-green:hover        { background-color: #259934; }
-.colours-green:active       { background-color: #0c5f17; }
-.green                      { composes: Button; composes: colours-green; color: white; }
+.colours-limegreen              { background-color: #31c22c; }
+.colours-limegreen:hover        { background-color: #4bdb46; }
+.colours-limegreen:active,
+.colours-limegreen[sel=true]    { background-color: #23aa1f; }
+.limegreen                      { composes: Button; composes: colours-limegreen; color: black; }
 
-.colours-darkgreen          { background-color: #094e12; }
-.colours-darkgreen:hover    { background-color: #0e5f19; }
-.colours-darkgreen:active   { background-color: #053a0c; }
-.darkgreen                  { composes: Button; composes: colours-darkgreen; color: white; }
+.colours-green                  { background-color: #147e22; }
+.colours-green:hover            { background-color: #259934; }
+.colours-green:active,
+.colours-green[sel=true]        { background-color: #0c5f17; }
+.green                          { composes: Button; composes: colours-green; color: white; }
 
-.colours-lightblue          { background-color: #1ec4cf; }
-.colours-lightblue:hover    { background-color: #31d9e6; }
-.colours-lightblue:active   { background-color: #10afbb; }
-.lightblue                  { composes: Button; composes: colours-lightblue; color: black; }
+.colours-darkgreen              { background-color: #094e12; }
+.colours-darkgreen:hover        { background-color: #0e5f19; }
+.colours-darkgreen:active,
+.colours-darkgreen[sel=true]    { background-color: #053a0c; }
+.darkgreen                      { composes: Button; composes: colours-darkgreen; color: white; }
 
-.colours-blue               { background-color: #1e71cf; }
-.colours-blue:hover         { background-color: #3485e2; }
-.colours-blue:active        { background-color: #0f5aaf; }
-.blue                       { composes: Button; composes: colours-blue; color: white; }
+.colours-lightblue              { background-color: #1ec4cf; }
+.colours-lightblue:hover        { background-color: #31d9e6; }
+.colours-lightblue:active,
+.colours-lightblue[sel=true]    { background-color: #10afbb; }
+.lightblue                      { composes: Button; composes: colours-lightblue; color: black; }
 
-.colours-darkblue           { background-color: #1e21cf; }
-.colours-darkblue:hover     { background-color: #3336eb; }
-.colours-darkblue:active    { background-color: #1215b3; }
-.darkblue                   { composes: Button; composes: colours-darkblue; color: white; }
+.colours-blue                   { background-color: #1e71cf; }
+.colours-blue:hover             { background-color: #3485e2; }
+.colours-blue:active,
+.colours-blue[sel=true]         { background-color: #0f5aaf; }
+.blue                           { composes: Button; composes: colours-blue; color: white; }
 
-.colours-indigo             { background-color: #240592; }
-.colours-indigo:hover       { background-color: #3d14af; }
-.colours-indigo:active      { background-color: #18027a; }
-.indigo                     { composes: Button; composes: colours-indigo; color: white; }
+.colours-darkblue               { background-color: #1e21cf; }
+.colours-darkblue:hover         { background-color: #3336eb; }
+.colours-darkblue:active,
+.colours-darkblue[sel=true]     { background-color: #1215b3; }
+.darkblue                       { composes: Button; composes: colours-darkblue; color: white; }
 
-.colours-purple             { background-color: #610ece; }
-.colours-purple:hover       { background-color: #7321dd; }
-.colours-purple:active      { background-color: #5207b4; }
-.purple                     { composes: Button; composes: colours-purple; color: white; }
+.colours-indigo                 { background-color: #240592; }
+.colours-indigo:hover           { background-color: #3d14af; }
+.colours-indigo:active,
+.colours-indigo[sel=true]       { background-color: #18027a; }
+.indigo                         { composes: Button; composes: colours-indigo; color: white; }
 
-.colours-lightbrown         { background-color: #b5651d; }
-.colours-lightbrown:hover   { background-color: #c27939; }
-.colours-lightbrown:active  { background-color: #9e5414; }
-.lightbrown                 { composes: Button; composes: colours-lightbrown; color: white; }
+.colours-purple                 { background-color: #610ece; }
+.colours-purple:hover           { background-color: #7321dd; }
+.colours-purple:active,
+.colours-purple[sel=true]       { background-color: #5207b4; }
+.purple                         { composes: Button; composes: colours-purple; color: white; }
 
-.colours-brown              { background-color: #683508; }
-.colours-brown:hover        { background-color: #854711; }
-.colours-brown:active       { background-color: #522804; }
-.brown                      { composes: Button; composes: colours-brown; color: white; }
+.colours-lightbrown             { background-color: #b5651d; }
+.colours-lightbrown:hover       { background-color: #c27939; }
+.colours-lightbrown:active,
+.colours-lightbrown[sel=true]   { background-color: #9e5414; }
+.lightbrown                     { composes: Button; composes: colours-lightbrown; color: white; }
 
-.colours-lightgrey          { background-color: #c7c7c7; }
-.colours-lightgrey:hover    { background-color: #dddddd; }
-.colours-lightgrey:active   { background-color: #a7a7a7; }
-.lightgrey                  { composes: Button; composes: colours-lightgrey; color: black; }
+.colours-brown                  { background-color: #683508; }
+.colours-brown:hover            { background-color: #854711; }
+.colours-brown:active,
+.colours-brown[sel=true]        { background-color: #522804; }
+.brown                          { composes: Button; composes: colours-brown; color: white; }
 
-.colours-grey               { background-color: #747474; }
-.colours-grey:hover         { background-color: #8b8b8b; }
-.colours-grey:active        { background-color: #555555; }
-.grey                       { composes: Button; composes: colours-grey; color: white; }
+.colours-lightgrey              { background-color: #c7c7c7; }
+.colours-lightgrey:hover        { background-color: #dddddd; }
+.colours-lightgrey:active,
+.colours-lightgrey[sel=true]    { background-color: #a7a7a7; }
+.lightgrey                      { composes: Button; composes: colours-lightgrey; color: black; }
 
-.colours-darkgrey           { background-color: #414141; }
-.colours-darkgrey:hover     { background-color: #585858; }
-.colours-darkgrey:active    { background-color: #2e2e2e; }
-.darkgrey                   { composes: Button; composes: colours-darkgrey; color: white; }
+.colours-grey                   { background-color: #747474; }
+.colours-grey:hover             { background-color: #8b8b8b; }
+.colours-grey:active,
+.colours-grey[sel=true]         { background-color: #555555; }
+.grey                           { composes: Button; composes: colours-grey; color: white; }
 
-.colours-black              { background-color: #111111; }
-.colours-black:hover        { background-color: #1b1b1b; }
-.colours-black:active       { background-color: #000000; }
-.black                      { composes: Button; composes: colours-black; color: white; }
+.colours-darkgrey               { background-color: #414141; }
+.colours-darkgrey:hover         { background-color: #585858; }
+.colours-darkgrey:active,
+.colours-darkgrey[sel=true]     { background-color: #2e2e2e; }
+.darkgrey                       { composes: Button; composes: colours-darkgrey; color: white; }
+
+.colours-black                  { background-color: #111111; }
+.colours-black:hover            { background-color: #1b1b1b; }
+.colours-black:active,
+.colours-black[sel=true]        { background-color: #000000; }
+.black                          { composes: Button; composes: colours-black; color: white; }

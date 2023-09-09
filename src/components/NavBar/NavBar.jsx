@@ -27,7 +27,9 @@ const Component = ({
                 <Button
                     text={option.text}
                     colour={option.colour}
+                    rounded={false}
                     onClickHandler={option.text !== currentOption ? onClickHandler : () => {}}
+                    selected={option.text === currentOption}
                     key={option.id}
                 />
             )}
