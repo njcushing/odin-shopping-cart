@@ -1,3 +1,8 @@
+.App {
+    padding: 0rem;
+    margin: 0rem;
+}
+
 .item-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, 19rem);

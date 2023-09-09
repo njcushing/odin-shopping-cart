@@ -3,6 +3,7 @@ import styles from './App.module.css'
 import { v4 as uuidv4 } from 'uuid';
 
 import ShopItemCard from '../ShopItemCard/ShopItemCard';
+import * as NavBar from '../NavBar/NavBar';
 
 const Url = 'https://fakestoreapi.com/products';
 const addItemFromAPI = (array, item) => {
@@ -18,11 +19,14 @@ const addItemFromAPI = (array, item) => {
 }
 
 function App() {
+    const [categories, setCategories] = useState(new Set());
     const [category, setCategory] = useState("men's clothing");
     const [items, setItems] = useState([]);
+    const [options, setOptions] = useState([]);
 
     useEffect(() => {
         let itemsNew = [];
+        let categoriesNew = new Set();
         fetch(Url, { mode: 'cors' })
         .then((response) => {
             if (response.status >= 400) {
@@ -32,20 +36,44 @@ function App() {
         })
         .then((response) => {
             response.forEach((item) => {
+                categoriesNew.add(item.category);
                 if (item.category === category) {
                     addItemFromAPI(itemsNew, item);
                 }
             });
             setItems(itemsNew);
+            setCategories(categoriesNew);
         })
-        .catch((error) => { throw new Error(error) });
+        .catch((error) => { throw new Error(error); });
     }, [category]);
 
+    useEffect(() => {
+        const optionsNew = [];
+        optionsNew.push({
+            ...NavBar.option(),
+            text: "Home",
+            textColour: "black",
+            backgroundColour: "white",
+        });
+        categories.forEach((category) => {
+            optionsNew.push({
+                ...NavBar.option(),
+                text: category,
+                textColour: "white",
+                backgroundColour: "green",
+            })
+        })
+        setOptions(optionsNew);
+    }, [categories, category]);
+
     return (
+        <div className={styles["App"]}>
+        <NavBar.Component ariaLabel="item-categories" options={options} />
         <div className={styles["item-list"]}>
             {items.map((item) => 
                 <ShopItemCard itemInformation={item} key={item.id} />
             )}
+        </div>
         </div>
     )
 }
