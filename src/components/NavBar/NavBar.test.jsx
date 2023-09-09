@@ -20,6 +20,7 @@ describe("UI/DOM testing...", () => {
                 options={mockOptions}
                 currentOption="Option 1"
             />);
+
             const ele = screen.getByRole("list", { name: /nav-bar-options/i });
             expect(ele.children.length).toBe(5);
         });
@@ -31,6 +32,7 @@ describe("UI/DOM testing...", () => {
                 options={mockOptions}
                 currentOption="Option 1"
             />);
+
             expect(screen.getByText("Option 1")).toBeInTheDocument();
             expect(screen.getByText("Option 2")).toBeInTheDocument();
             expect(screen.getByText("Option 3")).toBeInTheDocument();
@@ -38,12 +40,38 @@ describe("UI/DOM testing...", () => {
             expect(screen.getByText("Option 5")).toBeInTheDocument();
         });
         describe("Should invoke the 'onClick' callback function...", () => {
-            test("If the option clicked is not equal to the current one", () => {
-
-            });
-            test("Unless the option clicked is equal to the current one", () => {
+            test("If the option clicked is not equal to the current one", async () => {
+                const user = userEvent.setup();
+                const callback = vi.fn();
                 
-            })
+                render(<NavBar.Component
+                    ariaLabel={"nav-bar"}
+                    options={mockOptions}
+                    currentOption="Option 1"
+                    onClickHandler={callback}
+                />);
+                const ele = screen.getByText("Option 2");
+
+                await user.click(ele);
+
+                expect(callback).toHaveBeenCalled();
+            });
+            test("Unless the option clicked is equal to the current one", async () => {
+                const user = userEvent.setup();
+                const callback = vi.fn();
+                
+                render(<NavBar.Component
+                    ariaLabel={"nav-bar"}
+                    options={mockOptions}
+                    currentOption="Option 1"
+                    onClickHandler={callback}
+                />);
+                const ele = screen.getByText("Option 1");
+
+                await user.click(ele);
+
+                expect(callback).not.toHaveBeenCalled();
+            });
         });
     })
 });

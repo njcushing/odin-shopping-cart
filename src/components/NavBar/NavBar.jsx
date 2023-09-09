@@ -18,6 +18,8 @@ const Component = ({
     currentOption,
     onClickHandler,
 }) => {
+    
+
     return (
         <>
         <nav className={styles["NavBar"]} aria-label={ariaLabel}>
@@ -29,6 +31,7 @@ const Component = ({
                         color: option.textColour,
                         backgroundColor: option.backgroundColour,
                     }}
+                    onClick={option.text !== currentOption ? onClickHandler : () => {}}
                     key={option.id}
                 >{option.text}</li>
             )}
