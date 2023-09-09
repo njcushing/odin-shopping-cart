@@ -4,6 +4,7 @@ import styles from './ShopItemCard.module.css';
 
 import IntegerInput from '../IntegerInput/IntegerInput';
 import Button from '../Button/Button';
+import Price from '../Price/Price';
 
 const ShopItemCard = ({
     itemInformation,
@@ -24,31 +25,11 @@ const ShopItemCard = ({
             .catch((error) => { setError(error) });
     }, [itemInformation.imageUrl]);
 
-    const currencyFormatter = new Intl.NumberFormat('en-uk', {
-        style: 'currency',
-        currency: 'GBP',
-    })
-    const originalPriceString = currencyFormatter.format(itemInformation.originalPrice / 100);
-    const currentPriceString = currencyFormatter.format(itemInformation.currentPrice / 100);
-    const discountPercentageString = itemInformation.currentPrice !== 0
-    ? `-${((1 - (itemInformation.currentPrice / itemInformation.originalPrice)) * 100).toFixed(0)}%`
-    : "FREE";
-
     return (
         <div className={styles["ShopItemCard"]}>
         <h4 className={styles["item-name"]}>{itemInformation.name}</h4>
         <img className={styles["item-image"]} src={image} alt={itemInformation.name}></img>
-        <div className={styles["pricing-container"]}>
-            <div className={styles["original-price"]} aria-label="original-price">
-                {itemInformation.originalPrice !== itemInformation.currentPrice && originalPriceString}
-            </div>
-            <div className={styles["current-price"]} aria-label="current-price">
-                {currentPriceString}
-            </div>
-            <div className={styles["discount-percentage"]} aria-label="discount-percentage">
-                {itemInformation.originalPrice !== itemInformation.currentPrice && discountPercentageString}
-            </div>
-        </div>
+        <Price original={itemInformation.originalPrice} current={itemInformation.currentPrice} />
         <IntegerInput
             label="Quantity: "
             integer={quantity}

@@ -1,0 +1,33 @@
+.Price {
+    align-self: end;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: calc(19rem - (0.5rem * 2));
+    gap: 4%;
+}
+
+.original-price {
+    justify-self: end;
+    align-self: center;
+
+    color: black;
+    font-size: 1rem;
+    word-break: break-all;
+    text-decoration: line-through;
+}
+
+.current-price {
+    color: black;
+    font-size: 2rem;
+    word-break: break-all;
+}
+
+.discount-percentage {
+    align-self: center;
+
+    color: rgb(224, 6, 6);
+    font-size: 1rem;
+    word-break: break-all;
+}
