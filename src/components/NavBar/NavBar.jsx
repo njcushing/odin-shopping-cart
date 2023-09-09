@@ -42,9 +42,9 @@ const Component = ({
 Component.propTypes = {
     ariaLabel: PropTypes.string.isRequired,
     options: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
         text: PropTypes.string,
-        textColour: PropTypes.string,
-        backgroundColour: PropTypes.string,
+        colour: PropTypes.string,
     })).isRequired,
     currentOption: PropTypes.string,
     onClickHandler: PropTypes.func,
