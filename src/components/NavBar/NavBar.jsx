@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './NavBar.module.css'
 import { v4 as uuidv4 } from 'uuid';
 
+import Button from "./../Button/Button";
+
 const option = () => {
     return {
         id: uuidv4(),
         text: "",
-        textColour: "black",
-        backgroundColour: "white",
+        colour: "gold",
     }
 }
 
@@ -18,22 +19,17 @@ const Component = ({
     currentOption,
     onClickHandler,
 }) => {
-    
-
     return (
         <>
         <nav className={styles["NavBar"]} aria-label={ariaLabel}>
             <ul className={styles["unordered-list"]} aria-label={"nav-bar-options"}>
             {options.map((option) => 
-                <li
-                    className={styles["list-item"]}
-                    style={{
-                        color: option.textColour,
-                        backgroundColor: option.backgroundColour,
-                    }}
-                    onClick={option.text !== currentOption ? onClickHandler : () => {}}
+                <Button
+                    text={option.text}
+                    colour={option.colour}
+                    onClickHandler={option.text !== currentOption ? onClickHandler : () => {}}
                     key={option.id}
-                >{option.text}</li>
+                />
             )}
             </ul>
         </nav>
