@@ -1,6 +1,15 @@
 .App {
+    display: grid;
+    grid-template-columns: 1fr 16rem;
+
     padding: 0rem;
     margin: 0rem;
+}
+
+.shop-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .item-list {
@@ -8,4 +17,20 @@
     grid-template-columns: repeat(auto-fill, 19rem);
     justify-content: center;
     gap: 0.5rem;
+}
+
+.cart-sidebar-container {
+    width: 16rem;
+    height: 100vh;
+}
+
+.cart-sidebar-container {
+    position: fixed;
+}
+
+.cart-sidebar-content {
+    display: flex;
+    flex-direction: column;
+
+    height: inherit;
 }

@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import ShopItemCard from '../ShopItemCard/ShopItemCard';
 import * as NavBar from '../NavBar/NavBar';
+import Button from '../Button/Button';
+import * as ShopCart from '../ShopCart/ShopCart';
 
 let controller;
 
@@ -19,6 +21,8 @@ const addItemFromAPI = (array, item) => {
         quantityMax: item.rating.count,
     })
 }
+
+const cart = {};
 
 function App() {
     const [categories, setCategories] = useState(new Set());
@@ -75,18 +79,34 @@ function App() {
 
     return (
         <div className={styles["App"]}>
-        <NavBar.Component
-            ariaLabel="item-categories"
-            options={options}
-            currentOption={category}
-            onClickHandler={(e) => {
-                setCategory(e.target.textContent);
-            }}
-        />
-        <div className={styles["item-list"]}>
-            {items.map((item) => 
-                <ShopItemCard itemInformation={item} key={item.id} />
-            )}
+        <div className={styles["shop-main"]}>
+            <NavBar.Component
+                ariaLabel="item-categories"
+                options={options}
+                currentOption={category}
+                onClickHandler={(e) => {
+                    setCategory(e.target.textContent);
+                }}
+            />
+            <div className={styles["item-list"]}>
+                {items.map((item) => 
+                    <ShopItemCard itemInformation={item} key={item.id} />
+                )}
+            </div>
+        </div>
+        <div className={styles["cart-sidebar"]}>
+            <div className={styles["cart-sidebar-container"]}>
+                <div className={styles["cart-sidebar-content"]}>
+                    <Button
+                        text={`Cart (${Object.keys(cart).length}) - £0.00`}
+                        colour="red"
+                        width="100%"
+                        rounded={false}
+                        onClickHandler={() => {}}
+                    />
+                    <ShopCart.Component items={cart} />
+                </div>
+            </div>
         </div>
         </div>
     )
