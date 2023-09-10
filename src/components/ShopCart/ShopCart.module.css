@@ -1,0 +1,26 @@
+.ShopCart {
+    background-color: rgb(245, 245, 245);
+
+    width: inherit;
+    height: 100%;
+
+    margin: 0;
+}
+
+.cart-item-list {
+    display: flex;
+}
+
+.cart-item {
+    border: 1px solid white;
+}
+
+.empty-text {
+    color: black;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: normal;
+
+    padding: 0.2rem;
+    margin: 0;
+}
