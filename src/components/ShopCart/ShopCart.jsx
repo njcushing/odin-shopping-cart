@@ -7,6 +7,7 @@ const item = () => {
     return {
         key: uuidv4(),
         name: "",
+        quantity: 0,
     }
 }
 

@@ -2,27 +2,42 @@ import { useState, useEffect } from 'react'
 import styles from './App.module.css'
 import { v4 as uuidv4 } from 'uuid';
 
-import ShopItemCard from '../ShopItemCard/ShopItemCard';
+import * as ShopItemCard from '../ShopItemCard/ShopItemCard';
 import * as NavBar from '../NavBar/NavBar';
 import Button from '../Button/Button';
 import * as ShopCart from '../ShopCart/ShopCart';
 
+const cart = {};
 let controller;
 
-const Url = 'https://fakestoreapi.com/products';
-const addItemFromAPI = (array, item) => {
-    array.push({
-        id: uuidv4(),
-        name: item.description,
-        imageUrl: item.image,
-        originalPrice: (item.price * 100),
-        currentPrice: Math.ceil((item.price * 100) - Math.random() * ((item.price * 100) / 3)),
-        quantityMin: 0,
-        quantityMax: item.rating.count,
-    })
+let itemIDs = []
+let discounts = [ /* Fake Store API has 20 items */
+    0.14, 0.24, 0.10, 0.05, 0.07, 0.30, 0.00, 0.16, 0.11, 0.20,
+    0.12, 0.11, 0.03, 0.00, 0.17, 0.24, 0.06, 0.09, 0.15, 0.22,
+];
+let calculatePrice = (original, discount) => {
+    return Math.ceil(original * (1.0 - discount));
 }
 
-const cart = {};
+const Url = 'https://fakestoreapi.com/products/';
+const addItemFromAPI = (array, item) => {
+    const id = cart[itemIDs[array.length]];
+    const originalPrice = (item.price * 100);
+    const currentPrice = calculatePrice((item.price * 100), discounts[array.length]);
+    array.push({ ...ShopItemCard.itemProperties(),
+        id: id,
+        name: item.description,
+        imageUrl: item.image,
+        originalPrice: originalPrice,
+        currentPrice: currentPrice,
+        quantityMin: 0,
+        quantityMax: item.rating.count,
+        addToCartHandler: () => {
+            if (!cart.hasOwnProperty(id)) cart[id] = { ...ShopCart.item(), name: item.description };
+            cart[id].quantity = 1;
+        }
+    })
+}
 
 function App() {
     const [categories, setCategories] = useState(new Set());
@@ -90,7 +105,7 @@ function App() {
             />
             <div className={styles["item-list"]}>
                 {items.map((item) => 
-                    <ShopItemCard itemInformation={item} key={item.id} />
+                    <ShopItemCard.Component itemInformation={item} key={item.id} />
                 )}
             </div>
         </div>

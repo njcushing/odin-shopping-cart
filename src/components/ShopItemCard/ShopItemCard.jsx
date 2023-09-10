@@ -7,21 +7,33 @@ import Price from '../Price/Price';
 import IntegerInput from '../IntegerInput/IntegerInput';
 import Button from '../Button/Button';
 
-const ShopItemCard = ({
-    itemInformation,
+const itemProperties = () => {
+    return {
+        name: "",
+        imageUrl: "",
+        originalPrice: 0,
+        currentPrice: 0,
+        quantityMin: 0,
+        quantityMax: 0,
+        addToCartHandler: () => {},
+    }
+}
+
+const Component = ({
+    itemProperties,
 }) => {
     const [quantity, setQuantity] = useState(0);
 
     return (
         <div className={styles["ShopItemCard"]}>
-        <h4 className={styles["item-name"]}>{itemInformation.name}</h4>
-        <Image url={itemInformation.imageUrl} alt={itemInformation.name} />
-        <Price original={itemInformation.originalPrice} current={itemInformation.currentPrice} />
+        <h4 className={styles["item-name"]}>{itemProperties.name}</h4>
+        <Image url={itemProperties.imageUrl} alt={itemProperties.name} />
+        <Price original={itemProperties.originalPrice} current={itemProperties.currentPrice} />
         <IntegerInput
             label="Quantity: "
             integer={quantity}
-            integerMin={itemInformation.quantityMin}
-            integerMax={itemInformation.quantityMax}
+            integerMin={itemProperties.quantityMin}
+            integerMax={itemProperties.quantityMax}
             onChangeHandler={(e) => {
                 setQuantity(Math.floor(Number.parseInt(e.target.value)));
             }}
@@ -30,14 +42,14 @@ const ShopItemCard = ({
         <Button
             text="Add to Cart"
             colour="gold"
-            onClickHandler={itemInformation.addToCartHandler}
+            onClickHandler={itemProperties.addToCartHandler}
         />
         </div>
     )
 };
 
-ShopItemCard.propTypes = {
-    itemInformation: PropTypes.shape({
+Component.propTypes = {
+    itemProperties: PropTypes.shape({
         name: PropTypes.string.isRequired,
         imageUrl: PropTypes.string.isRequired,
         originalPrice: PropTypes.number.isRequired,
@@ -48,8 +60,8 @@ ShopItemCard.propTypes = {
     }).isRequired,
 }
 
-ShopItemCard.defaultProps = {
-    itemInformation: PropTypes.shape({
+Component.defaultProps = {
+    itemProperties: PropTypes.shape({
         name: "Item Information Not Found",
         imageUrl: "",
         originalPrice: 0,
@@ -60,4 +72,4 @@ ShopItemCard.defaultProps = {
     }),
 }
 
-export default ShopItemCard;
+export { Component, itemProperties };

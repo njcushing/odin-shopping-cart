@@ -2,9 +2,9 @@ import { vi } from 'vitest'
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import ShopItemCard from './ShopItemCard.jsx'
+import * as ShopItemCard from './ShopItemCard.jsx'
 
-const mockItemInformation = { /* Do not change existing fields, only add new ones */
+const mockItemProperties = { ...ShopItemCard.itemProperties(), /* Do not change existing fields, only add new ones */
     name: "Shop Item",
     imageUrl: "",
     originalPrice: 1500,
@@ -26,21 +26,21 @@ vi.mock('./../IntegerInput/IntegerInput.jsx', () => ({
 
 describe("UI/DOM Testing...", () => {
     describe("The item name element...", () => {
-        test(`Should have textContent equal to the provided itemInformation.name
+        test(`Should have textContent equal to the provided itemProperties.name
          value`, () => {
-            render(<ShopItemCard itemInformation={mockItemInformation} />);
+            render(<ShopItemCard.Component itemProperties={mockItemProperties} />);
             expect(screen.getByRole("heading", { name: /Shop Item/i })).toBeInTheDocument();
         });
     });
     describe("The IntegerInput component for the 'quantity' prop...", () => {
         test("Should have a label with textContent equal to 'Quantity:'", () => {
-            render(<ShopItemCard itemInformation={mockItemInformation} />);
+            render(<ShopItemCard.Component itemProperties={mockItemProperties} />);
             expect(screen.getByRole("spinbutton", { name: /Quantity:/i })).toBeInTheDocument();
         });
     });
     describe("The 'Add to Cart' Button...", () => {
         test("Should have textContent equal to 'Add to Cart'", () => {
-            render(<ShopItemCard itemInformation={mockItemInformation} />);
+            render(<ShopItemCard.Component itemProperties={mockItemProperties} />);
             expect(screen.getByRole("button", { name: /Add to Cart/i })).toBeInTheDocument();
         });
         test(`Should invoke the callback function passed as the
@@ -48,12 +48,12 @@ describe("UI/DOM Testing...", () => {
             const user = userEvent.setup();
             const callback = vi.fn();
             
-            render(<ShopItemCard
-                itemInformation={{ ...mockItemInformation,
+            render(<ShopItemCard.Component
+                itemProperties={{ ...mockItemProperties,
                     addToCartHandler: callback,
                 }}
             />);
-            
+
             const ele = screen.getByRole("button", { name: /Add to Cart/i });
 
             await user.click(ele);
