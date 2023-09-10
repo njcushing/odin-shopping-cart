@@ -20,20 +20,20 @@ const itemProperties = () => {
 }
 
 const Component = ({
-    itemProperties,
+    item,
 }) => {
     const [quantity, setQuantity] = useState(0);
 
     return (
         <div className={styles["ShopItemCard"]}>
-        <h4 className={styles["item-name"]}>{itemProperties.name}</h4>
-        <Image url={itemProperties.imageUrl} alt={itemProperties.name} />
-        <Price original={itemProperties.originalPrice} current={itemProperties.currentPrice} />
+        <h4 className={styles["item-name"]}>{item.name}</h4>
+        <Image url={item.imageUrl} alt={item.name} />
+        <Price original={item.originalPrice} current={item.currentPrice} />
         <IntegerInput
             label="Quantity: "
             integer={quantity}
-            integerMin={itemProperties.quantityMin}
-            integerMax={itemProperties.quantityMax}
+            integerMin={item.quantityMin}
+            integerMax={item.quantityMax}
             onChangeHandler={(e) => {
                 setQuantity(Math.floor(Number.parseInt(e.target.value)));
             }}
@@ -42,14 +42,14 @@ const Component = ({
         <Button
             text="Add to Cart"
             colour="gold"
-            onClickHandler={itemProperties.addToCartHandler}
+            onClickHandler={item.addToCartHandler}
         />
         </div>
     )
 };
 
 Component.propTypes = {
-    itemProperties: PropTypes.shape({
+    item: PropTypes.shape({
         name: PropTypes.string.isRequired,
         imageUrl: PropTypes.string.isRequired,
         originalPrice: PropTypes.number.isRequired,
@@ -61,7 +61,7 @@ Component.propTypes = {
 }
 
 Component.defaultProps = {
-    itemProperties: PropTypes.shape({
+    item: PropTypes.shape({
         name: "Item Information Not Found",
         imageUrl: "",
         originalPrice: 0,

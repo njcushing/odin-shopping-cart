@@ -21,7 +21,7 @@ let calculatePrice = (original, discount) => {
 
 const Url = 'https://fakestoreapi.com/products/';
 const addItemFromAPI = (array, item) => {
-    const id = cart[itemIDs[array.length]];
+    const id = item.id;
     const originalPrice = (item.price * 100);
     const currentPrice = calculatePrice((item.price * 100), discounts[array.length]);
     array.push({ ...ShopItemCard.itemProperties(),
@@ -105,7 +105,7 @@ function App() {
             />
             <div className={styles["item-list"]}>
                 {items.map((item) => 
-                    <ShopItemCard.Component itemInformation={item} key={item.id} />
+                    <ShopItemCard.Component item={item} key={item.id} />
                 )}
             </div>
         </div>
