@@ -7,7 +7,7 @@ const item = () => {
     return {
         key: uuidv4(),
         name: "",
-        quantity: 0,
+        quantity: 1,
     }
 }
 
@@ -18,7 +18,7 @@ const Component = ({
     const ele = (<>
         <div className={styles["ShopCart"]} aria-label={ariaLabel}>
         {Object.keys(items).length > 0
-            ? (
+            ? (<>
                 <ul className={styles["cart-item-list"]} aria-label="cart-item-list">
                     {Object.keys(items).map((itemId) => 
                         <li
@@ -27,7 +27,7 @@ const Component = ({
                         >{items[itemId].name}</li>
                     )}
                 </ul>
-            )
+            </>)
             : (
                 <h4 className={styles["empty-text"]}>Your Cart is Empty</h4>
             )
@@ -40,10 +40,7 @@ const Component = ({
 
 Component.propTypes = {
     ariaLabel: PropTypes.string,
-    items: PropTypes.shape(PropTypes.shape({
-        key: PropTypes.string,
-        name: PropTypes.string,
-    })),
+    items: PropTypes.object,
 }
 
 Component.defaultProps = {

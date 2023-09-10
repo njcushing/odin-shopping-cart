@@ -7,10 +7,9 @@ import * as NavBar from '../NavBar/NavBar';
 import Button from '../Button/Button';
 import * as ShopCart from '../ShopCart/ShopCart';
 
-const cart = {};
+const cartInit = {};
 let controller;
 
-let itemIDs = []
 let discounts = [ /* Fake Store API has 20 items */
     0.14, 0.24, 0.10, 0.05, 0.07, 0.30, 0.00, 0.16, 0.11, 0.20,
     0.12, 0.11, 0.03, 0.00, 0.17, 0.24, 0.06, 0.09, 0.15, 0.22,
@@ -20,26 +19,9 @@ let calculatePrice = (original, discount) => {
 }
 
 const Url = 'https://fakestoreapi.com/products/';
-const addItemFromAPI = (array, item) => {
-    const id = item.id;
-    const originalPrice = (item.price * 100);
-    const currentPrice = calculatePrice((item.price * 100), discounts[array.length]);
-    array.push({ ...ShopItemCard.itemProperties(),
-        id: id,
-        name: item.description,
-        imageUrl: item.image,
-        originalPrice: originalPrice,
-        currentPrice: currentPrice,
-        quantityMin: 0,
-        quantityMax: item.rating.count,
-        addToCartHandler: () => {
-            if (!Object.hasOwnProperty.call(cart, id)) cart[id] = { ...ShopCart.item(), name: item.description };
-            cart[id].quantity = 1;
-        }
-    })
-}
 
 function App() {
+    const [cart, setCart] = useState(JSON.parse(JSON.stringify(cartInit)));
     const [categories, setCategories] = useState(new Set());
     const [category, setCategory] = useState("men's clothing");
     const [items, setItems] = useState([]);
@@ -64,7 +46,24 @@ function App() {
             response.forEach((item) => {
                 categoriesNew.add(item.category);
                 if (item.category === category) {
-                    addItemFromAPI(itemsNew, item);
+                    const id = item.id;
+                    const originalPrice = (item.price * 100);
+                    const currentPrice = calculatePrice((item.price * 100), discounts[itemsNew.length]);
+                    itemsNew.push({ ...ShopItemCard.itemProperties(),
+                        id: id,
+                        name: item.description,
+                        imageUrl: item.image,
+                        originalPrice: originalPrice,
+                        currentPrice: currentPrice,
+                        quantityMin: 0,
+                        quantityMax: item.rating.count,
+                        addToCartHandler: () => {
+                            const cartCopy = JSON.parse(JSON.stringify(cart));
+                            if (!cartCopy[id]) cartCopy[id] = { ...ShopCart.item(), name: item.description }
+                            cartCopy[id].quantity = 1;
+                            setCart(cartCopy);
+                        }
+                    })
                 }
             });
             setItems(itemsNew);
@@ -73,7 +72,7 @@ function App() {
         .catch((error) => {
             throw new Error(error);
         });
-    }, [category]);
+    }, [category, cart]);
 
     useEffect(() => {
         const optionsNew = [];
