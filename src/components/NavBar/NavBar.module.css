@@ -13,9 +13,18 @@
 
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 
     list-style: none;
 
     padding: 0rem;
     margin: 0rem;
+}
+
+.unordered-list button {
+    flex-grow: 1;
+    flex-shrink: 0;
+
+    border: 0.1rem solid rgba(0, 0, 0, 0.5);
+    margin: -0.05rem;
 }
