@@ -30,9 +30,7 @@ const ShopItemCard = ({
         <Button
             text="Add to Cart"
             colour="gold"
-            onClickHandler={() => {
-
-            }}
+            onClickHandler={itemInformation.addToCartHandler}
         />
         </div>
     )
@@ -46,6 +44,7 @@ ShopItemCard.propTypes = {
         currentPrice: PropTypes.number.isRequired,
         quantityMin: PropTypes.number.isRequired,
         quantityMax: PropTypes.number.isRequired,
+        addToCartHandler: PropTypes.func.isRequired,
     }).isRequired,
 }
 
@@ -57,6 +56,7 @@ ShopItemCard.defaultProps = {
         currentPrice: 0,
         quantityMin: 0,
         quantityMax: 0,
+        addToCartHandler: () => {},
     }),
 }
 

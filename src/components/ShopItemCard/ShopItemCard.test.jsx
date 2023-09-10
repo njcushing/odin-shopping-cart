@@ -11,6 +11,7 @@ const mockItemInformation = { /* Do not change existing fields, only add new one
     currentPrice: 1500,
     quantityMin: 0,
     quantityMax: 100,
+    addToCartHandler: () => {},
 }
 
 vi.mock('./../IntegerInput/IntegerInput.jsx', () => ({ 
@@ -41,6 +42,23 @@ describe("UI/DOM Testing...", () => {
         test("Should have textContent equal to 'Add to Cart'", () => {
             render(<ShopItemCard itemInformation={mockItemInformation} />);
             expect(screen.getByRole("button", { name: /Add to Cart/i })).toBeInTheDocument();
+        });
+        test(`Should invoke the callback function passed as the
+         'addToCardHandler' prop when clicked`, async () => {
+            const user = userEvent.setup();
+            const callback = vi.fn();
+            
+            render(<ShopItemCard
+                itemInformation={{ ...mockItemInformation,
+                    addToCartHandler: callback,
+                }}
+            />);
+            
+            const ele = screen.getByRole("button", { name: /Add to Cart/i });
+
+            await user.click(ele);
+
+            expect(callback).toHaveBeenCalled();
         });
     });
 });
