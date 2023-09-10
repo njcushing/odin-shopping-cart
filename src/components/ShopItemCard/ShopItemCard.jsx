@@ -2,9 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ShopItemCard.module.css';
 
+import Image from '../Image/Image';
+import Price from '../Price/Price';
 import IntegerInput from '../IntegerInput/IntegerInput';
 import Button from '../Button/Button';
-import Price from '../Price/Price';
 
 const ShopItemCard = ({
     itemInformation,
@@ -28,7 +29,7 @@ const ShopItemCard = ({
     return (
         <div className={styles["ShopItemCard"]}>
         <h4 className={styles["item-name"]}>{itemInformation.name}</h4>
-        <img className={styles["item-image"]} src={image} alt={itemInformation.name}></img>
+        <Image url={image} alt={itemInformation.name} />
         <Price original={itemInformation.originalPrice} current={itemInformation.currentPrice} />
         <IntegerInput
             label="Quantity: "

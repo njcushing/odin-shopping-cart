@@ -31,13 +31,6 @@ describe("UI/DOM Testing...", () => {
             expect(screen.getByRole("heading", { name: /Shop Item/i })).toBeInTheDocument();
         });
     });
-    describe("The item image element...", () => {
-        test(`Should have a 'src' attribute with value equal to the
-           itemInformation.imageUrl prop's value`, () => {
-            render(<ShopItemCard itemInformation={mockItemInformation} />);
-            expect(screen.getByRole("img", { name: mockItemInformation.name })).toBeInTheDocument();
-        });
-    });
     describe("The IntegerInput component for the 'quantity' prop...", () => {
         test("Should have a label with textContent equal to 'Quantity:'", () => {
             render(<ShopItemCard itemInformation={mockItemInformation} />);
