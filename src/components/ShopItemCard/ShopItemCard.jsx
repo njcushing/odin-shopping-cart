@@ -11,25 +11,11 @@ const ShopItemCard = ({
     itemInformation,
 }) => {
     const [quantity, setQuantity] = useState(0);
-    const [image, setImage] = useState("");
-    const [error, setError] = useState(null);
-
-    const previousImage = useRef(itemInformation.imageUrl);
-
-    useEffect(() => {
-        fetch(itemInformation.imageUrl, { mode: 'cors' })
-            .then((response) => { if (response.status >= 400) throw new
-                Error(`itemInformation.imageUrl} is not a link to a valid image.`);
-                return response; 
-            })
-            .then((response) => setImage(response.url))
-            .catch((error) => { setError(error) });
-    }, [itemInformation.imageUrl]);
 
     return (
         <div className={styles["ShopItemCard"]}>
         <h4 className={styles["item-name"]}>{itemInformation.name}</h4>
-        <Image url={image} alt={itemInformation.name} />
+        <Image url={itemInformation.imageUrl} alt={itemInformation.name} />
         <Price original={itemInformation.originalPrice} current={itemInformation.currentPrice} />
         <IntegerInput
             label="Quantity: "
