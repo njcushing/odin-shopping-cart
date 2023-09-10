@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import * as ShopItemCard from './ShopItemCard.jsx'
 
-const mockItemProperties = { ...ShopItemCard.itemProperties(), /* Do not change existing fields, only add new ones */
+const mockItem = { /* Do not change existing fields, only add new ones */
     name: "Shop Item",
     imageUrl: "",
     originalPrice: 1500,
@@ -26,21 +26,21 @@ vi.mock('./../IntegerInput/IntegerInput.jsx', () => ({
 
 describe("UI/DOM Testing...", () => {
     describe("The item name element...", () => {
-        test(`Should have textContent equal to the provided itemProperties.name
+        test(`Should have textContent equal to the provided item.name
          value`, () => {
-            render(<ShopItemCard.Component itemProperties={mockItemProperties} />);
+            render(<ShopItemCard.Component item={mockItem} />);
             expect(screen.getByRole("heading", { name: /Shop Item/i })).toBeInTheDocument();
         });
     });
     describe("The IntegerInput component for the 'quantity' prop...", () => {
         test("Should have a label with textContent equal to 'Quantity:'", () => {
-            render(<ShopItemCard.Component itemProperties={mockItemProperties} />);
+            render(<ShopItemCard.Component item={mockItem} />);
             expect(screen.getByRole("spinbutton", { name: /Quantity:/i })).toBeInTheDocument();
         });
     });
     describe("The 'Add to Cart' Button...", () => {
         test("Should have textContent equal to 'Add to Cart'", () => {
-            render(<ShopItemCard.Component itemProperties={mockItemProperties} />);
+            render(<ShopItemCard.Component item={mockItem} />);
             expect(screen.getByRole("button", { name: /Add to Cart/i })).toBeInTheDocument();
         });
         test(`Should invoke the callback function passed as the
@@ -49,7 +49,7 @@ describe("UI/DOM Testing...", () => {
             const callback = vi.fn();
             
             render(<ShopItemCard.Component
-                itemProperties={{ ...mockItemProperties,
+                item={{ ...mockItem,
                     addToCartHandler: callback,
                 }}
             />);

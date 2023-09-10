@@ -33,7 +33,7 @@ const addItemFromAPI = (array, item) => {
         quantityMin: 0,
         quantityMax: item.rating.count,
         addToCartHandler: () => {
-            if (!cart.hasOwnProperty(id)) cart[id] = { ...ShopCart.item(), name: item.description };
+            if (!Object.hasOwnProperty.call(cart, id)) cart[id] = { ...ShopCart.item(), name: item.description };
             cart[id].quantity = 1;
         }
     })

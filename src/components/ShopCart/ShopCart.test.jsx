@@ -4,13 +4,13 @@ import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import * as ShopCart from './ShopCart.jsx'
 
-const mockItems = [
-    { ...ShopCart.item(), name: "Item 1", },
-    { ...ShopCart.item(), name: "Item 2", },
-    { ...ShopCart.item(), name: "Item 3", },
-    { ...ShopCart.item(), name: "Item 4", },
-    { ...ShopCart.item(), name: "Item 5", },
-]
+const mockItems = {
+    "Item_1": { ...ShopCart.item(), name: "Item 1", },
+    "Item_2": { ...ShopCart.item(), name: "Item 2", },
+    "Item_3": { ...ShopCart.item(), name: "Item 3", },
+    "Item_4": { ...ShopCart.item(), name: "Item 4", },
+    "Item_5": { ...ShopCart.item(), name: "Item 5", },
+}
 
 describe("UI/DOM testing...", () => {
     describe("The unordered-list container element containing the shop items...", () => {
