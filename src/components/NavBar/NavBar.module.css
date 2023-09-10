@@ -27,4 +27,6 @@
 
     border: 0.1rem solid rgba(0, 0, 0, 0.5);
     margin: -0.05rem;
+
+    text-transform: capitalize;
 }
