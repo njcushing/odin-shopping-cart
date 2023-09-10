@@ -20,7 +20,7 @@ describe("UI/DOM testing...", () => {
                 items={mockItems}
             />);
 
-            const ele = screen.getByRole("list", { name: /shop-cart/i });
+            const ele = screen.getByRole("list", { name: /cart-item-list/i });
             expect(ele.children.length).toBe(5);
         });
     });

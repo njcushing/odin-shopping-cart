@@ -18,7 +18,7 @@ const Component = ({
         <div className={styles["ShopCart"]} aria-label={ariaLabel}>
         {Object.keys(items).length > 0
             ? (
-                <ul className={styles["cart-item-list"]}>
+                <ul className={styles["cart-item-list"]} aria-label="cart-item-list">
                     {Object.keys(items).map((itemId) => 
                         <li
                             className={styles["cart-item"]}
