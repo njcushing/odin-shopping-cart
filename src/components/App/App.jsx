@@ -93,7 +93,11 @@ function App() {
                 if (item.category === category) {
                     const id = item.id;
                     displayedItemsNew[id] = { ...items[key],
-                        currentQuantity: 1,
+                        quantityChangeHandler: (e) => {
+                            const itemsCopy = JSON.parse(JSON.stringify(items));
+                            itemsCopy[id].currentQuantity = Math.floor(Number.parseInt(e.target.value));
+                            setItems(itemsCopy);
+                        }
                     };
                 }
             });
