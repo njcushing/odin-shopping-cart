@@ -51,7 +51,8 @@ function App() {
                         originalPrice: originalPrice,
                         currentPrice: currentPrice,
                         quantityMin: 0,
-                        quantityMax: item.rating.count,
+                        quantityMax: item.rating.count - (id in cart ? cart[id].quantity : 0),
+                        quantityAvailable: item.rating.count,
                     };
                 });
                 return itemsNew;
@@ -86,24 +87,37 @@ function App() {
     }, [categories]);
 
     useEffect(() => {
+        console.log("oio");
         setDisplayedItems(() => {
             const displayedItemsNew = {};
-            Object.keys(items).forEach((key) => {
-                const item = items[key];
+            Object.keys(items).forEach((id) => {
+                const item = items[id];
                 if (item.category === category) {
-                    const id = item.id;
-                    displayedItemsNew[id] = { ...items[key],
+                    displayedItemsNew[id] = { ...items[id],
+                        quantityMax: item.quantityAvailable - (id in cart ? cart[id].quantity : 0),
                         quantityChangeHandler: (e) => {
                             const itemsCopy = JSON.parse(JSON.stringify(items));
                             itemsCopy[id].currentQuantity = Math.floor(Number.parseInt(e.target.value));
                             setItems(itemsCopy);
-                        }
+                        },
+                        addToCartHandler: () => {
+                            const cartCopy = JSON.parse(JSON.stringify(cart));
+                            if (!cartCopy[id]) {
+                                cartCopy[id] = { ...ShopCart.item(),
+                                    name: item.description,
+                                    quantity: item.currentQuantity,
+                                }
+                            } else {
+                                cartCopy[id].quantity += item.currentQuantity;
+                            }
+                            setCart(cartCopy);
+                        },
                     };
                 }
             });
             return displayedItemsNew;
         })
-    }, [category, items]);
+    }, [category, items, cart]);
 
     return (
         <div className={styles["App"]}>
