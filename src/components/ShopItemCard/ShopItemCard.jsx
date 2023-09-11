@@ -15,6 +15,8 @@ const itemProperties = () => {
         currentPrice: 0,
         quantityMin: 0,
         quantityMax: 0,
+        currentQuantity: 0,
+        quantityChangeHandler: () => {},
         addToCartHandler: () => {},
     }
 }
@@ -22,8 +24,6 @@ const itemProperties = () => {
 const Component = ({
     item,
 }) => {
-    const [quantity, setQuantity] = useState(0);
-
     return (
         <div className={styles["ShopItemCard"]}>
         <h4 className={styles["item-name"]}>{item.name}</h4>
@@ -31,12 +31,10 @@ const Component = ({
         <Price original={item.originalPrice} current={item.currentPrice} />
         <IntegerInput
             label="Quantity: "
-            integer={quantity}
+            integer={item.currentQuantity}
             integerMin={item.quantityMin}
             integerMax={item.quantityMax}
-            onChangeHandler={(e) => {
-                setQuantity(Math.floor(Number.parseInt(e.target.value)));
-            }}
+            onChangeHandler={item.quantityChangeHandler}
             outlined={true}
         />
         <Button
@@ -56,20 +54,24 @@ Component.propTypes = {
         currentPrice: PropTypes.number.isRequired,
         quantityMin: PropTypes.number.isRequired,
         quantityMax: PropTypes.number.isRequired,
+        currentQuantity: PropTypes.number.isRequired,
+        quantityChangeHandler: PropTypes.func.isRequired,
         addToCartHandler: PropTypes.func.isRequired,
     }).isRequired,
 }
 
 Component.defaultProps = {
-    item: PropTypes.shape({
+    item: {
         name: "Item Information Not Found",
         imageUrl: "",
         originalPrice: 0,
         currentPrice: 0,
         quantityMin: 0,
         quantityMax: 0,
+        currentQuantity: 0,
+        quantityChangeHandler: () => {},
         addToCartHandler: () => {},
-    }),
+    },
 }
 
 export { Component, itemProperties };

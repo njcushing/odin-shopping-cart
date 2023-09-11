@@ -11,6 +11,8 @@ const mockItem = { /* Do not change existing fields, only add new ones */
     currentPrice: 1500,
     quantityMin: 0,
     quantityMax: 100,
+    currentQuantity: 0,
+    quantityChangeHandler: () => {},
     addToCartHandler: () => {},
 }
 

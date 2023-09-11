@@ -8,7 +8,6 @@ import Button from '../Button/Button';
 import * as ShopCart from '../ShopCart/ShopCart';
 
 const cartInit = {};
-let controller;
 
 let discounts = [ /* Fake Store API has 20 items */
     0.14, 0.24, 0.10, 0.05, 0.07, 0.30, 0.00, 0.16, 0.11, 0.20,
@@ -24,55 +23,50 @@ function App() {
     const [cart, setCart] = useState(JSON.parse(JSON.stringify(cartInit)));
     const [categories, setCategories] = useState(new Set());
     const [category, setCategory] = useState("men's clothing");
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState({});
+    const [displayedItems, setDisplayedItems] = useState(new Set());
     const [options, setOptions] = useState([]);
 
     useEffect(() => {
-        let itemsNew = [];
-        let categoriesNew = new Set();
-
-        if (controller) controller.abort();
-        controller = new AbortController();
-        const signal = controller.signal;
-
-        fetch(Url, { mode: 'cors', signal: signal })
+        fetch(Url, { mode: 'cors' })
         .then((response) => {
             if (response.status >= 400) {
-                throw new Error(`Warning: ${Url} is an invalid call to the Fake Store API`);
+                throw new Error(`Warning: ${Url} is an invalid url for the Fake Store API`);
             }
             return response.json();
         })
         .then((response) => {
-            response.forEach((item) => {
-                categoriesNew.add(item.category);
-                if (item.category === category) {
+            setItems(() => {
+                const itemsNew = {};
+                Object.keys(response).forEach((key) => {
+                    const item = response[key];
                     const id = item.id;
                     const originalPrice = (item.price * 100);
-                    const currentPrice = calculatePrice((item.price * 100), discounts[itemsNew.length]);
-                    itemsNew.push({ ...ShopItemCard.itemProperties(),
+                    const currentPrice = calculatePrice((item.price * 100), discounts[Object.keys(itemsNew).length]);
+                    itemsNew[id] = { ...ShopItemCard.itemProperties(),
                         id: id,
+                        category: item.category,
                         name: item.description,
                         imageUrl: item.image,
                         originalPrice: originalPrice,
                         currentPrice: currentPrice,
                         quantityMin: 0,
                         quantityMax: item.rating.count,
-                        addToCartHandler: () => {
-                            const cartCopy = JSON.parse(JSON.stringify(cart));
-                            if (!cartCopy[id]) cartCopy[id] = { ...ShopCart.item(), name: item.description }
-                            cartCopy[id].quantity = 1;
-                            setCart(cartCopy);
-                        }
-                    })
-                }
+                    };
+                });
+                return itemsNew;
             });
-            setItems(itemsNew);
-            setCategories(categoriesNew);
         })
         .catch((error) => {
             throw new Error(error);
         });
-    }, [category, cart]);
+    }, []);
+
+    useEffect(() => {
+        const categoriesNew = new Set();
+        Object.keys(items).forEach((key) => categoriesNew.add(items[key].category));
+        setCategories(categoriesNew);
+    }, [items]);
 
     useEffect(() => {
         const optionsNew = [];
@@ -89,7 +83,23 @@ function App() {
             })
         })
         setOptions(optionsNew);
-    }, [categories, category]);
+    }, [categories]);
+
+    useEffect(() => {
+        setDisplayedItems(() => {
+            const displayedItemsNew = {};
+            Object.keys(items).forEach((key) => {
+                const item = items[key];
+                if (item.category === category) {
+                    const id = item.id;
+                    displayedItemsNew[id] = { ...items[key],
+                        currentQuantity: 1,
+                    };
+                }
+            });
+            return displayedItemsNew;
+        })
+    }, [category, items]);
 
     return (
         <div className={styles["App"]}>
@@ -103,8 +113,8 @@ function App() {
                 }}
             />
             <div className={styles["item-list"]}>
-                {items.map((item) => 
-                    <ShopItemCard.Component item={item} key={item.id} />
+                {Object.keys(displayedItems).map((item) => 
+                    <ShopItemCard.Component item={displayedItems[item]} key={item} />
                 )}
             </div>
         </div>
@@ -113,7 +123,7 @@ function App() {
                 <div className={styles["cart-sidebar-content"]}>
                     <Button
                         text={`Cart (${Object.keys(cart).length}) - £0.00`}
-                        colour="red"
+                        colour="orange"
                         width="100%"
                         rounded={false}
                         onClickHandler={() => {}}
