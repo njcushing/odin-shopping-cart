@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import * as ShopItemCard from '../ShopItemCard/ShopItemCard';
 import * as NavBar from '../NavBar/NavBar';
 import Button from '../Button/Button';
+import Price from '../Price/Price';
 import * as CartSidebar from '../CartSidebar/CartSidebar';
 
 const cartInit = {};
@@ -117,8 +118,15 @@ function App() {
                 }
             });
             return displayedItemsNew;
-        })
+        });
     }, [category, items, cart]);
+
+    let cartTotal = 0;
+    let cartKeys = Object.keys(cart);
+    for (let i = 0; i < cartKeys.length; i++) {
+        let item = cart[cartKeys[i]];
+        cartTotal += item.currentPrice * item.currentQuantity;
+    }
 
     return (
         <div className={styles["App"]}>
@@ -144,13 +152,18 @@ function App() {
             <div className={styles["cart-sidebar-container"]}>
                 <div className={styles["cart-sidebar-content"]}>
                     <Button
-                        text={`Cart (${Object.keys(cart).length}) - £0.00`}
+                        text="Go To Checkout"
                         colour="orange"
                         width="100%"
                         rounded={false}
                         onClickHandler={() => {}}
                     />
                     <CartSidebar.Component items={cart} />
+                    <Price
+                        scale={2}
+                        original={cartTotal}
+                        current={cartTotal}
+                    />
                 </div>
             </div>
         </div>

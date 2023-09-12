@@ -26,22 +26,30 @@ const Component = ({
 }) => {
     return (<>
         <div className={styles["CartSidebarItemCard"]}>
-        <h4 className={styles["item-name"]}>{item.name}</h4>
-        <Image url={item.imageUrl} alt={item.name} />
-        <Price original={item.originalPrice} current={item.currentPrice} />
-        <IntegerInput
-            label="Quantity: "
-            integer={item.currentQuantity}
-            integerMin={item.quantityMin}
-            integerMax={item.quantityMax}
-            onChangeHandler={item.quantityChangeHandler}
-            outlined={true}
-        />
-        <Button
-            text="Remove From Cart"
-            colour="red"
-            onClickHandler={item.removeFromCartHandler}
-        />
+        <div className={styles["image-container"]}>
+            <Image url={item.imageUrl} alt={item.name} />
+        </div>
+        <div className={styles["information-container"]}>
+            <h4 className={styles["item-name"]}>{item.name}</h4>
+            <Price
+                original={item.currentPrice * item.currentQuantity}
+                current={item.currentPrice * item.currentQuantity}
+            />
+            <IntegerInput
+                label="Quantity: "
+                integer={item.currentQuantity}
+                integerMin={item.quantityMin}
+                integerMax={item.quantityMax}
+                onChangeHandler={item.quantityChangeHandler}
+                outlined={true}
+            />
+            <Button
+                text="Remove From Cart"
+                colour="red"
+                scale={0.8}
+                onClickHandler={item.removeFromCartHandler}
+            />
+            </div>
         </div>
     </>);
 };

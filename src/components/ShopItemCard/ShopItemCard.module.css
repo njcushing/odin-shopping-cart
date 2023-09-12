@@ -15,7 +15,7 @@
     box-shadow: 0px 4px 5px -0px rgba(0, 0, 0, 0.3);
 
     display: grid;
-    grid-template-rows: 6.4rem 17rem repeat(3, auto);
+    grid-template-rows: 6.4rem 17rem 4rem repeat(2, auto);
     gap: 0.5rem;
 
     box-sizing: border-box; /* Prevent padding from making container larger than defined width + height */

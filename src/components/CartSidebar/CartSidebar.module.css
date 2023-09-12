@@ -1,5 +1,7 @@
 .ShopCart {
     background-color: rgb(245, 245, 245);
+    
+    overflow: auto;
 
     width: inherit;
     height: 100%;

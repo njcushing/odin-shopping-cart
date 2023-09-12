@@ -28,7 +28,11 @@ const Component = ({
         <div className={styles["ShopItemCard"]}>
         <h4 className={styles["item-name"]}>{item.name}</h4>
         <Image url={item.imageUrl} alt={item.name} />
-        <Price original={item.originalPrice} current={item.currentPrice} />
+        <Price
+            scale={2}
+            original={item.originalPrice}
+            current={item.currentPrice}
+        />
         <IntegerInput
             label="Quantity: "
             integer={item.currentQuantity}
