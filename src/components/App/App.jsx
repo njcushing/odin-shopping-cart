@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import * as ShopItemCard from '../ShopItemCard/ShopItemCard';
 import * as NavBar from '../NavBar/NavBar';
 import Button from '../Button/Button';
-import * as ShopCart from '../CartSidebar/CartSidebar';
+import * as CartSidebar from '../CartSidebar/CartSidebar';
 
 const cartInit = {};
 
@@ -103,12 +103,12 @@ function App() {
                             if (item.currentQuantity > 0) {
                                 const cartCopy = JSON.parse(JSON.stringify(cart));
                                 if (!cartCopy[id]) {
-                                    cartCopy[id] = { ...ShopCart.item(),
-                                        name: item.description,
-                                        quantity: item.currentQuantity,
+                                    cartCopy[id] = { ...CartSidebar.itemProperties(),
+                                        ...item,
+                                        currentQuantity: item.currentQuantity,
                                     }
                                 } else {
-                                    cartCopy[id].quantity += item.currentQuantity;
+                                    cartCopy[id].currentQuantity += item.currentQuantity;
                                 }
                                 setCart(cartCopy);
                             }
@@ -135,7 +135,6 @@ function App() {
                 {Object.keys(displayedItems).map((item) => 
                     <ShopItemCard.Component
                         item={displayedItems[item]}
-                        type="shopMain"
                         key={item}
                     />
                 )}
@@ -151,7 +150,7 @@ function App() {
                         rounded={false}
                         onClickHandler={() => {}}
                     />
-                    <ShopCart.Component items={cart} />
+                    <CartSidebar.Component items={cart} />
                 </div>
             </div>
         </div>

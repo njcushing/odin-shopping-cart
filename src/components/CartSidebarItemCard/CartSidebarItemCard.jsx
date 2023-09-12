@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import styles from './ShopItemCard.module.css';
+import styles from './CartSidebarItemCard.module.css';
 
 import Image from '../Image/Image';
 import Price from '../Price/Price';
@@ -17,7 +17,7 @@ const itemProperties = () => {
         quantityMax: 0,
         currentQuantity: 0,
         quantityChangeHandler: () => {},
-        addToCartHandler: () => {},
+        removeFromCartHandler: () => {},
     }
 }
 
@@ -25,7 +25,7 @@ const Component = ({
     item,
 }) => {
     return (<>
-        <div className={styles["ShopItemCard"]}>
+        <div className={styles["CartSidebarItemCard"]}>
         <h4 className={styles["item-name"]}>{item.name}</h4>
         <Image url={item.imageUrl} alt={item.name} />
         <Price original={item.originalPrice} current={item.currentPrice} />
@@ -38,9 +38,9 @@ const Component = ({
             outlined={true}
         />
         <Button
-            text="Add to Cart"
-            colour="gold"
-            onClickHandler={item.addToCartHandler}
+            text="Remove From Cart"
+            colour="red"
+            onClickHandler={item.removeFromCartHandler}
         />
         </div>
     </>);
@@ -56,7 +56,7 @@ Component.propTypes = {
         quantityMax: PropTypes.number.isRequired,
         currentQuantity: PropTypes.number.isRequired,
         quantityChangeHandler: PropTypes.func.isRequired,
-        addToCartHandler: PropTypes.func.isRequired,
+        removeFromCartHandler: PropTypes.func.isRequired,
     }).isRequired,
 }
 
@@ -70,7 +70,7 @@ Component.defaultProps = {
         quantityMax: 0,
         currentQuantity: 0,
         quantityChangeHandler: () => {},
-        addToCartHandler: () => {},
+        removeFromCartHandler: () => {},
     },
 }
 

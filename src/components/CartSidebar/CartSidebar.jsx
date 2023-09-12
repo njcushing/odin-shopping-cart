@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
-import styles from './ShopCart.module.css'
+import styles from './CartSidebar.module.css'
 import { v4 as uuidv4 } from 'uuid';
 
-import * as ShopItemCard from '../ShopItemCard/ShopItemCard';
+import * as CartSidebarItemCard from '../CartSidebarItemCard/CartSidebarItemCard';
 
-const item = () => {
-    return {
-        key: uuidv4(),
-        name: "",
-        quantity: 1,
-    }
+const itemProperties = () => {
+    return CartSidebarItemCard.itemProperties();
 }
 
 const Component = ({
@@ -23,12 +19,8 @@ const Component = ({
             ? (<>
                 <ul className={styles["cart-item-list"]} aria-label="cart-item-list">
                     {Object.keys(items).map((id) => 
-                        <ShopItemCard.Component
-                            item={{ ...ShopItemCard.itemProperties(),
-                                name: items[id].name,
-                                currentQuantity: items[id].quantity,
-                            }}
-                            type="cartSidebar"
+                        <CartSidebarItemCard.Component
+                            item={items[id]}
                             key={id}
                         />
                     )}
@@ -54,4 +46,4 @@ Component.defaultProps = {
     items: {},
 }
 
-export { Component, item };
+export { Component, itemProperties };
