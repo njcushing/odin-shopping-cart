@@ -101,16 +101,18 @@ function App() {
                             setItems(itemsCopy);
                         },
                         addToCartHandler: () => {
-                            const cartCopy = JSON.parse(JSON.stringify(cart));
-                            if (!cartCopy[id]) {
-                                cartCopy[id] = { ...ShopCart.item(),
-                                    name: item.description,
-                                    quantity: item.currentQuantity,
+                            if (item.currentQuantity > 0) {
+                                const cartCopy = JSON.parse(JSON.stringify(cart));
+                                if (!cartCopy[id]) {
+                                    cartCopy[id] = { ...ShopCart.item(),
+                                        name: item.description,
+                                        quantity: item.currentQuantity,
+                                    }
+                                } else {
+                                    cartCopy[id].quantity += item.currentQuantity;
                                 }
-                            } else {
-                                cartCopy[id].quantity += item.currentQuantity;
+                                setCart(cartCopy);
                             }
-                            setCart(cartCopy);
                         },
                     };
                 }
