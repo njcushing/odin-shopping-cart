@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Price.module.css'
 
 const Price = ({
+    scale,
     original,
     current,
 }) => {
@@ -18,13 +19,31 @@ const Price = ({
 
     return (
         <div className={styles["Price"]}>
-            <div className={styles["original-price"]} aria-label="original-price">
+            <div
+                className={styles["original-price"]}
+                style={{
+                    fontSize: `${scale * 0.5}rem`,
+                }}
+                aria-label="original-price"
+            >
                 {original !== current && originalPriceString}
             </div>
-            <div className={styles["current-price"]} aria-label="current-price">
+            <div
+                className={styles["current-price"]}
+                style={{
+                    fontSize: `${scale}rem`,
+                }}
+                aria-label="current-price"
+            >
                 {currentPriceString}
             </div>
-            <div className={styles["discount-percentage"]} aria-label="discount-percentage">
+            <div
+                className={styles["discount-percentage"]}
+                style={{
+                    fontSize: `${scale * 0.5}rem`,
+                }}
+                aria-label="discount-percentage"
+            >
                 {original !== current && discountPercentageString}
             </div>
         </div>
@@ -32,11 +51,13 @@ const Price = ({
 }
 
 Price.propTypes = {
+    scale: PropTypes.number.isRequired,
     original: PropTypes.number.isRequired,
     current: PropTypes.number.isRequired,
 }
 
 Price.defaultProps = {
+    scale: 1.0,
     original: 0,
     current: 0,
 }
