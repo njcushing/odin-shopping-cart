@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './ShopCart.module.css'
 import { v4 as uuidv4 } from 'uuid';
 
+import * as ShopItemCard from '../ShopItemCard/ShopItemCard';
+
 const item = () => {
     return {
         key: uuidv4(),
@@ -20,11 +22,15 @@ const Component = ({
         {Object.keys(items).length > 0
             ? (<>
                 <ul className={styles["cart-item-list"]} aria-label="cart-item-list">
-                    {Object.keys(items).map((itemId) => 
-                        <li
-                            className={styles["cart-item"]}
-                            key={items[itemId].key}    
-                        >{items[itemId].name}</li>
+                    {Object.keys(items).map((id) => 
+                        <ShopItemCard.Component
+                            item={{ ...ShopItemCard.itemProperties(),
+                                name: items[id].name,
+                                currentQuantity: items[id].quantity,
+                            }}
+                            type="cartSidebar"
+                            key={id}
+                        />
                     )}
                 </ul>
             </>)

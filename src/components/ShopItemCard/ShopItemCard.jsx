@@ -23,27 +23,57 @@ const itemProperties = () => {
 
 const Component = ({
     item,
+    type,
 }) => {
-    return (
-        <div className={styles["ShopItemCard"]}>
-        <h4 className={styles["item-name"]}>{item.name}</h4>
-        <Image url={item.imageUrl} alt={item.name} />
-        <Price original={item.originalPrice} current={item.currentPrice} />
-        <IntegerInput
-            label="Quantity: "
-            integer={item.currentQuantity}
-            integerMin={item.quantityMin}
-            integerMax={item.quantityMax}
-            onChangeHandler={item.quantityChangeHandler}
-            outlined={true}
-        />
-        <Button
-            text="Add to Cart"
-            colour="gold"
-            onClickHandler={item.addToCartHandler}
-        />
-        </div>
-    )
+    switch (type) {
+        case "cartMain":
+            return (<>
+            
+            </>);
+        case "cartSidebar":
+            return (<>
+                <div className={styles["ShopItemCard-cartSidebar"]}>
+                <h4 className={styles["item-name-cartSidebar"]}>{item.name}</h4>
+                <Image url={item.imageUrl} alt={item.name} />
+                <Price original={item.originalPrice} current={item.currentPrice} />
+                <IntegerInput
+                    label="Quantity: "
+                    integer={item.currentQuantity}
+                    integerMin={item.quantityMin}
+                    integerMax={item.quantityMax}
+                    onChangeHandler={item.quantityChangeHandler}
+                    outlined={true}
+                />
+                <Button
+                    text="Add to Cart"
+                    colour="gold"
+                    onClickHandler={item.addToCartHandler}
+                />
+                </div>
+            </>);
+        case "shopMain":
+        default:
+            return (<>
+                <div className={styles["ShopItemCard-shopMain"]}>
+                <h4 className={styles["item-name-shopMain"]}>{item.name}</h4>
+                <Image url={item.imageUrl} alt={item.name} />
+                <Price original={item.originalPrice} current={item.currentPrice} />
+                <IntegerInput
+                    label="Quantity: "
+                    integer={item.currentQuantity}
+                    integerMin={item.quantityMin}
+                    integerMax={item.quantityMax}
+                    onChangeHandler={item.quantityChangeHandler}
+                    outlined={true}
+                />
+                <Button
+                    text="Add to Cart"
+                    colour="gold"
+                    onClickHandler={item.addToCartHandler}
+                />
+                </div>
+            </>);
+    }
 };
 
 Component.propTypes = {
@@ -58,6 +88,7 @@ Component.propTypes = {
         quantityChangeHandler: PropTypes.func.isRequired,
         addToCartHandler: PropTypes.func.isRequired,
     }).isRequired,
+    type: PropTypes.oneOf(["shopMain, cartMain, cartSidebar"])
 }
 
 Component.defaultProps = {
@@ -72,6 +103,7 @@ Component.defaultProps = {
         quantityChangeHandler: () => {},
         addToCartHandler: () => {},
     },
+    type: "shopMain",
 }
 
 export { Component, itemProperties };

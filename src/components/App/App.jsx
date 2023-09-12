@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import * as ShopItemCard from '../ShopItemCard/ShopItemCard';
 import * as NavBar from '../NavBar/NavBar';
 import Button from '../Button/Button';
-import * as ShopCart from '../ShopCart/ShopCart';
+import * as ShopCart from '../CartSidebar/CartSidebar';
 
 const cartInit = {};
 
@@ -87,7 +87,6 @@ function App() {
     }, [categories]);
 
     useEffect(() => {
-        console.log("oio");
         setDisplayedItems(() => {
             const displayedItemsNew = {};
             Object.keys(items).forEach((id) => {
@@ -134,7 +133,11 @@ function App() {
             />
             <div className={styles["item-list"]}>
                 {Object.keys(displayedItems).map((item) => 
-                    <ShopItemCard.Component item={displayedItems[item]} key={item} />
+                    <ShopItemCard.Component
+                        item={displayedItems[item]}
+                        type="shopMain"
+                        key={item}
+                    />
                 )}
             </div>
         </div>
