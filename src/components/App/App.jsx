@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './App.module.css'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -28,6 +28,9 @@ function App() {
     const [displayedItems, setDisplayedItems] = useState(new Set());
     const [options, setOptions] = useState([]);
 
+    const cartRef = useRef();
+    cartRef.current = cart;
+
     useEffect(() => {
         fetch(Url, { mode: 'cors' })
         .then((response) => {
@@ -51,8 +54,8 @@ function App() {
                         imageUrl: item.image,
                         originalPrice: originalPrice,
                         currentPrice: currentPrice,
-                        quantityMin: 0,
-                        quantityMax: item.rating.count - (id in cart ? cart[id].quantity : 0),
+                        quantityMin: 1,
+                        quantityMax: item.rating.count,
                         quantityAvailable: item.rating.count,
                     };
                 });
@@ -88,6 +91,15 @@ function App() {
     }, [categories]);
 
     useEffect(() => {
+        const cartDeepCopy = () => {
+            const cartNew = {};
+            const cartKeys = Object.keys(cartRef.current);
+            cartKeys.forEach((key) => {
+                const cartItem = cartRef.current[key];
+                cartNew[cartItem.id] = { ...cartItem }
+            });
+            return cartNew;
+        }
         setDisplayedItems(() => {
             const displayedItemsNew = {};
             Object.keys(items).forEach((id) => {
@@ -102,15 +114,30 @@ function App() {
                         },
                         addToCartHandler: () => {
                             if (item.currentQuantity > 0) {
-                                const cartCopy = JSON.parse(JSON.stringify(cart));
-                                if (!cartCopy[id]) {
+                                const cartCopy = cartDeepCopy();
+                                if (!(id in cartCopy)) {
                                     cartCopy[id] = { ...CartSidebar.itemProperties(),
                                         ...item,
+                                        quantityMin: 1,
                                         currentQuantity: item.currentQuantity,
                                     }
                                 } else {
                                     cartCopy[id].currentQuantity += item.currentQuantity;
                                 }
+                                const cartCopyKeys = Object.keys(cartCopy);
+                                cartCopyKeys.forEach((key) => {
+                                    const cartCopyItem = cartCopy[key];
+                                    cartCopyItem.quantityChangeHandler = (e) => {
+                                        const cartCopy = cartDeepCopy();
+                                        cartCopy[key].currentQuantity = Math.floor(Number.parseInt(e.target.value));
+                                        setCart(cartCopy);
+                                    }
+                                    cartCopyItem.removeFromCartHandler = () => {
+                                        const cartCopy = cartDeepCopy();
+                                        delete cartCopy[key];
+                                        setCart(cartCopy);
+                                    }
+                                });
                                 setCart(cartCopy);
                             }
                         },
@@ -160,7 +187,7 @@ function App() {
                     />
                     <CartSidebar.Component items={cart} />
                     <Price
-                        scale={2}
+                        scale={1.6}
                         original={cartTotal}
                         current={cartTotal}
                     />
