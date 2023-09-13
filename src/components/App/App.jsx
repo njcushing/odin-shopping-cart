@@ -94,7 +94,7 @@ function App() {
                 const item = items[id];
                 if (item.category === category) {
                     displayedItemsNew[id] = { ...items[id],
-                        quantityMax: item.quantityAvailable - (id in cart ? cart[id].quantity : 0),
+                        quantityMax: item.quantityAvailable - (id in cart ? cart[id].currentQuantity : 0),
                         quantityChangeHandler: (e) => {
                             const itemsCopy = JSON.parse(JSON.stringify(items));
                             itemsCopy[id].currentQuantity = Math.floor(Number.parseInt(e.target.value));
