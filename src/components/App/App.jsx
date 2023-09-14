@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import styles from './App.module.css'
 import { v4 as uuidv4 } from 'uuid';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import * as ShopItemCard from '../ShopItemCard/ShopItemCard';
-import * as NavBar from '../NavBar/NavBar';
-import Button from '../Button/Button';
-import Price from '../Price/Price';
-import * as CartSidebar from '../CartSidebar/CartSidebar';
+import * as ShopItemCard from './../ShopItemCard/ShopItemCard';
+import * as NavBar from './../NavBar/NavBar';
+import Button from './../Button/Button';
+import Price from './../Price/Price';
+import * as CartSidebar from './../CartSidebar/CartSidebar';
+import * as Cart from './../Cart/Cart';
 
 const cartInit = {};
 
@@ -157,53 +159,42 @@ function App() {
         });
     }, [category, items, cart]);
 
-    let cartTotal = 0;
-    let cartKeys = Object.keys(cart);
-    for (let i = 0; i < cartKeys.length; i++) {
-        let item = cart[cartKeys[i]];
-        cartTotal += item.currentPrice * item.currentQuantity;
-    }
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: (
+                <>
+                <div className={styles["shop-main"]}>
+                    <NavBar.Component
+                        ariaLabel="item-categories"
+                        options={options}
+                        currentOption={category}
+                        onClickHandler={(e) => {
+                            setCategory(e.target.textContent);
+                        }}
+                    />
+                    <div className={styles["item-list"]}>
+                        {Object.keys(displayedItems).map((item) => 
+                            <ShopItemCard.Component
+                                item={displayedItems[item]}
+                                key={item}
+                            />
+                        )}
+                    </div>
+                </div>
+                <CartSidebar.Component items={cart} />
+                </>
+            ),
+        },
+        {
+            path: "/cart",
+            element: <Cart.Component />,
+        },
+    ]);
 
     return (
         <div className={styles["App"]}>
-        <div className={styles["shop-main"]}>
-            <NavBar.Component
-                ariaLabel="item-categories"
-                options={options}
-                currentOption={category}
-                onClickHandler={(e) => {
-                    setCategory(e.target.textContent);
-                }}
-            />
-            <div className={styles["item-list"]}>
-                {Object.keys(displayedItems).map((item) => 
-                    <ShopItemCard.Component
-                        item={displayedItems[item]}
-                        key={item}
-                    />
-                )}
-            </div>
-        </div>
-        <div className={styles["cart-sidebar"]}>
-            <div className={styles["cart-sidebar-container"]}>
-                <div className={styles["cart-sidebar-content"]}>
-                    <Button
-                        text="Go To Cart"
-                        colour="orange"
-                        width="100%"
-                        rounded={false}
-                        onClickHandler={() => {}}
-                        link={"Cart"}
-                    />
-                    <CartSidebar.Component items={cart} />
-                    <Price
-                        scale={1.6}
-                        original={cartTotal}
-                        current={cartTotal}
-                    />
-                </div>
-            </div>
-        </div>
+            <RouterProvider router={router} />
         </div>
     )
 }

@@ -18,21 +18,3 @@
     justify-content: center;
     gap: 0.5rem;
 }
-
-.cart-sidebar-container {
-    background-color: white;
-    
-    width: 17rem;
-    height: 100vh;
-}
-
-.cart-sidebar-container {
-    position: fixed;
-}
-
-.cart-sidebar-content {
-    display: grid;
-    grid-template-rows: auto 1fr;
-
-    height: inherit;
-}

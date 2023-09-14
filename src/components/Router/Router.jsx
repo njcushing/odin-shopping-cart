@@ -3,18 +3,18 @@ import App from "./../App/App";
 import Cart from "./../Cart/Cart";
 
 const Router = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <App />,
-    },
-    {
-      path: "/cart",
-      element: <Cart />,
-    },
-  ]);
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <App />,
+        },
+        {
+            path: "/cart",
+            element: <Cart />,
+        },
+    ]);
 
-  return <RouterProvider router={router} />;
+    return <RouterProvider router={router} />;
 };
 
 export default Router;

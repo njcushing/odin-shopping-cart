@@ -1,28 +1,34 @@
 .ShopCart {
-    background-color: rgb(245, 245, 245);
-    
-    overflow: scroll;
-    overflow-x: hidden;
-
-    width: inherit;
-    height: 100%;
-
     margin: 0;
 }
 
-.cart-item-list {
+.container {
+    position: fixed;
+
+    width: inherit;
+    height: 100vh;
+
+    background-color: rgb(245, 245, 245);
+}
+
+.content {
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    height: inherit;
+}
+
+.item-list {
     display: grid;
     grid-template-rows: auto;
     gap: 0.4rem;
 
+    overflow: scroll;
+    overflow-x: hidden;
+
     list-style: none;
     padding: 0.4rem;
     margin: 0;
-}
-
-.cart-item {
-    color: black;
-    border: 1px solid black;
 }
 
 .empty-text {
