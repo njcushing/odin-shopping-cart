@@ -1,9 +1,13 @@
-.ShopCart {
+.CartSidebar {
+    width: 17rem;
+
     margin: 0;
 }
 
 .container {
     position: fixed;
+
+    width: inherit;
 
     background-color: rgb(245, 245, 245);
 }
@@ -12,7 +16,6 @@
     display: grid;
     grid-template-rows: auto 1fr;
 
-    width: inherit;
     height: 100vh;
 }
 
