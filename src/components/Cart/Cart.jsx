@@ -4,6 +4,7 @@ import styles from './Cart.module.css';
 
 import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
 import CartItemCard from './../CartItemCard/CartItemCard';
+import Button from './../Button/Button';
 
 const Cart = ({
     ariaLabel,
@@ -34,7 +35,19 @@ const Cart = ({
         <div className={styles["Cart"]} aria-label={ariaLabel} >
             <div className={styles["container"]}>
                 <h1 className={styles["title"]}>Your Items</h1>
+                <Button
+                    text="Return to Shop"
+                    colour="orange"
+                    width="12rem"
+                    onClickHandler={() => {}}
+                />
                 {ele}
+                <Button
+                    text="Purchase Items"
+                    colour="limegreen"
+                    width="12rem"
+                    onClickHandler={() => {}}
+                />
             </div>
         </div>
     )

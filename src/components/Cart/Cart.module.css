@@ -9,12 +9,18 @@
 .container {
     display: grid;
     grid-template-columns: 50rem;
-    grid-template-rows: auto;
+    grid-template-rows: repeat(2, auto) 1fr auto;
+    gap: 1.0rem;
 
     min-width: 50rem;
     height: 30rem;
 
+    border-radius: 1.0rem;
     background-color: white;
+    box-shadow: 0px 4px 5px -0px rgba(0, 0, 0, 0.3);
+
+    padding: 1.0rem;
+    margin: 1.0rem;
 }
 
 .title {
@@ -24,6 +30,10 @@
 
     padding: 0.4rem 0.2rem;
     margin: 0rem;
+}
+
+.container a { /* Targeting the 'Return to Shop' & 'Purchase Items' button here */
+    justify-self: center;
 }
 
 .cart-item-list {
@@ -42,6 +52,8 @@
 }
 
 .empty-text {
+    align-self: start;
+
     color: black;
     text-align: center;
     font-size: 0.9rem;
