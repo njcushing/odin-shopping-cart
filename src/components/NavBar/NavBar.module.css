@@ -21,7 +21,7 @@
     margin: 0rem;
 }
 
-.unordered-list button {
+.unordered-list a { /* Button component uses React Link components which are <a> elements */
     flex-grow: 1;
     flex-shrink: 0;
 
