@@ -5,9 +5,6 @@
 .container {
     position: fixed;
 
-    width: inherit;
-    height: 100vh;
-
     background-color: rgb(245, 245, 245);
 }
 
@@ -15,16 +12,19 @@
     display: grid;
     grid-template-rows: auto 1fr;
 
-    height: inherit;
+    width: inherit;
+    height: 100vh;
+}
+
+.item-container {
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .item-list {
     display: grid;
     grid-template-rows: auto;
     gap: 0.4rem;
-
-    overflow: scroll;
-    overflow-x: hidden;
 
     list-style: none;
     padding: 0.4rem;
