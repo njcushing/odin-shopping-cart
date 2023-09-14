@@ -1,7 +1,3 @@
-.Button {
-    border: none;
-}
-
 .Button:disabled                { color: #444444; background-color: #afafaf; }
 .Button:disabled:hover          { color: #444444; background-color: #afafaf; }
 .Button:disabled:active         { color: #444444; background-color: #afafaf; }

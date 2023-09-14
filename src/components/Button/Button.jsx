@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Button.module.css';
+import { Link } from "react-router-dom";
 
 const Button = ({
     text,
@@ -11,13 +12,17 @@ const Button = ({
     onClickHandler,
     enabled,
     selected,
+    link,
 }) => {
     return (
-        <button
+        <Link
+            to={link}
             className={styles[colour]}
             style={{
                 width: width,
                 borderRadius: rounded ? "9999px" : "0px",
+                textAlign: "center",
+                textDecoration: "none",
                 fontSize: `${scale}rem`,
                 boxShadow: `0rem ${scale * 0.2}rem ${scale * 0.16}rem -0rem rgba(0, 0, 0, 0.16)`,
                 padding: `${scale * 0.3}rem ${scale * 0.15}rem`,
@@ -26,7 +31,7 @@ const Button = ({
             disabled={!enabled}
             sel={`${selected ? "true" : "false"}`}
         >{text}
-        </button>
+        </Link>
     )
 };
 
@@ -59,6 +64,7 @@ Button.propTypes = {
     onClickHandler: PropTypes.func,
     enabled: PropTypes.bool,
     selected: PropTypes.bool,
+    link: PropTypes.string,
 }
 
 Button.defaultProps = {
@@ -70,6 +76,7 @@ Button.defaultProps = {
     onClickHandler: () => {},
     enabled: true,
     selected: false,
+    link: "",
 }
 
 export default Button;
