@@ -193,6 +193,7 @@ function App() {
                         width="100%"
                         rounded={false}
                         onClickHandler={() => {}}
+                        link={"Cart"}
                     />
                     <CartSidebar.Component items={cart} />
                     <Price
