@@ -3,10 +3,9 @@ import styles from './App.module.css'
 import { v4 as uuidv4 } from 'uuid';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import * as ShopItemCard from './../ShopItemCard/ShopItemCard';
+import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
+import * as ShopItemList from './../ShopItemList/ShopItemList';
 import * as NavBar from './../NavBar/NavBar';
-import Button from './../Button/Button';
-import Price from './../Price/Price';
 import * as CartSidebar from './../CartSidebar/CartSidebar';
 import * as Cart from './../Cart/Cart';
 
@@ -52,7 +51,7 @@ function App() {
                     const id = item.id;
                     const originalPrice = (item.price * 100);
                     const currentPrice = calculatePrice((item.price * 100), discounts[Object.keys(itemsNew).length]);
-                    itemsNew[id] = { ...ShopItemCard.itemProperties(),
+                    itemsNew[id] = { ...ShopItemList.itemProperties(),
                         id: id,
                         category: item.category,
                         name: item.description,
@@ -173,14 +172,7 @@ function App() {
                             setCategory(e.target.textContent);
                         }}
                     />
-                    <div className={styles["item-list"]}>
-                        {Object.keys(displayedItems).map((item) => 
-                            <ShopItemCard.Component
-                                item={displayedItems[item]}
-                                key={item}
-                            />
-                        )}
-                    </div>
+                    <ShopItemList.Component items={displayedItems} />
                 </div>
                 <CartSidebar.Component items={cart} />
                 </>
