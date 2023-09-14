@@ -1,6 +1,6 @@
 .App {
     display: grid;
-    grid-template-columns: 1fr 16rem;
+    grid-template-columns: 1fr 17rem;
 
     padding: 0rem;
     margin: 0rem;
@@ -22,7 +22,7 @@
 .cart-sidebar-container {
     background-color: white;
     
-    width: 16rem;
+    width: 17rem;
     height: 100vh;
 }
 
