@@ -3,15 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './CartSidebar.module.css'
 import { v4 as uuidv4 } from 'uuid';
 
+import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
 import Button from '../Button/Button';
-import * as CartSidebarItemCard from '../CartSidebarItemCard/CartSidebarItemCard';
+import CartSidebarItemCard from '../CartSidebarItemCard/CartSidebarItemCard';
 import Price from '../Price/Price';
 
-const itemProperties = () => {
-    return CartSidebarItemCard.itemProperties();
-}
-
-const Component = ({
+const CartSidebar = ({
     ariaLabel,
     items,
 }) => {
@@ -38,8 +35,11 @@ const Component = ({
                         ? (<>
                             <ul className={styles["item-list"]} aria-label="shop-cart-sidebar-item-list">
                                 {Object.keys(items).map((id) => 
-                                    <CartSidebarItemCard.Component
-                                        item={items[id]}
+                                    <CartSidebarItemCard
+                                        item={{
+                                            ...ShopItemProperties(),
+                                            ...items[id],
+                                        }}
                                         key={id}
                                     />
                                 )}
@@ -63,14 +63,14 @@ const Component = ({
     return ele;
 }
 
-Component.propTypes = {
+CartSidebar.propTypes = {
     ariaLabel: PropTypes.string,
     items: PropTypes.object,
 }
 
-Component.defaultProps = {
+CartSidebar.defaultProps = {
     ariaLabel: "shop-cart-sidebar",
     items: {},
 }
 
-export { Component, itemProperties };
+export default CartSidebar;

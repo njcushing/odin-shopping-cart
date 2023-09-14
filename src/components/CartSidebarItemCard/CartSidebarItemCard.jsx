@@ -2,84 +2,56 @@ import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from './CartSidebarItemCard.module.css';
 
+import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
 import Image from '../Image/Image';
 import Price from '../Price/Price';
 import IntegerInput from '../IntegerInput/IntegerInput';
 import Button from '../Button/Button';
 
-const itemProperties = () => {
-    return {
-        name: "",
-        imageUrl: "",
-        originalPrice: 0,
-        currentPrice: 0,
-        quantityMin: 0,
-        quantityMax: 0,
-        currentQuantity: 0,
-        quantityChangeHandler: () => {},
-        removeFromCartHandler: () => {},
-    }
-}
-
-const Component = ({
+const CartSidebarItemCard = ({
     item,
 }) => {
+    const itemProps = {
+        ...ShopItemProperties(),
+        ...item,
+    }
+
     return (<>
         <div className={styles["CartSidebarItemCard"]}>
         <div className={styles["image-container"]}>
-            <Image url={item.imageUrl} alt={item.name} />
+            <Image url={itemProps.imageUrl} alt={itemProps.name} />
         </div>
         <div className={styles["information-container"]}>
-            <h4 className={styles["item-name"]}>{item.name}</h4>
+            <h4 className={styles["item-name"]}>{itemProps.name}</h4>
             <Price
-                original={item.currentPrice * item.currentQuantity}
-                current={item.currentPrice * item.currentQuantity}
+                original={itemProps.currentPrice * itemProps.currentQuantity}
+                current={itemProps.currentPrice * itemProps.currentQuantity}
             />
             <IntegerInput
                 label="Quantity: "
-                integer={item.currentQuantity}
-                integerMin={item.quantityMin}
-                integerMax={item.quantityMax}
-                onChangeHandler={item.quantityChangeHandler}
+                integer={itemProps.currentQuantity}
+                integerMin={itemProps.quantityMin}
+                integerMax={itemProps.quantityMax}
+                onChangeHandler={itemProps.quantityChangeHandler}
                 outlined={true}
             />
             <Button
                 text="Remove From Cart"
                 colour="red"
                 scale={0.8}
-                onClickHandler={item.removeFromCartHandler}
+                onClickHandler={itemProps.removeFromCartHandler}
             />
             </div>
         </div>
     </>);
 };
 
-Component.propTypes = {
-    item: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        imageUrl: PropTypes.string.isRequired,
-        originalPrice: PropTypes.number.isRequired,
-        currentPrice: PropTypes.number.isRequired,
-        quantityMin: PropTypes.number.isRequired,
-        quantityMax: PropTypes.number.isRequired,
-        currentQuantity: PropTypes.number.isRequired,
-        quantityChangeHandler: PropTypes.func.isRequired,
-        removeFromCartHandler: PropTypes.func.isRequired,
-    }).isRequired,
+CartSidebarItemCard.propTypes = {
+    item: PropTypes.object,
 }
 
-Component.defaultProps = {
-    item: {
-        name: "Item Information Not Found",
-        imageUrl: "",
-        originalPrice: 0,
-        currentPrice: 0,
-        quantityMin: 0,
-        quantityMax: 0,
-        currentQuantity: 0,
-        quantityChangeHandler: () => {},
-        removeFromCartHandler: () => {},
-    },
+CartSidebarItemCard.defaultProps = {
+    item: { ...ShopItemProperties(), },
 }
 
-export { Component, itemProperties };
+export default CartSidebarItemCard;

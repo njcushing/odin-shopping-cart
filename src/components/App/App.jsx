@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
-import * as ShopItemList from './../ShopItemList/ShopItemList';
+import ShopItemList from './../ShopItemList/ShopItemList';
 import * as NavBar from './../NavBar/NavBar';
-import * as CartSidebar from './../CartSidebar/CartSidebar';
-import * as Cart from './../Cart/Cart';
+import CartSidebar from './../CartSidebar/CartSidebar';
+import Cart from './../Cart/Cart';
 
 const cartInit = {};
 
@@ -51,7 +51,7 @@ function App() {
                     const id = item.id;
                     const originalPrice = (item.price * 100);
                     const currentPrice = calculatePrice((item.price * 100), discounts[Object.keys(itemsNew).length]);
-                    itemsNew[id] = { ...ShopItemList.itemProperties(),
+                    itemsNew[id] = { ...ShopItemProperties(),
                         id: id,
                         category: item.category,
                         name: item.description,
@@ -120,7 +120,7 @@ function App() {
                             if (item.currentQuantity > 0) {
                                 const cartCopy = cartDeepCopy();
                                 if (!(id in cartCopy)) {
-                                    cartCopy[id] = { ...CartSidebar.itemProperties(),
+                                    cartCopy[id] = { ...ShopItemProperties(),
                                         ...item,
                                         quantityMin: 1,
                                         currentQuantity: item.currentQuantity,
@@ -172,15 +172,15 @@ function App() {
                             setCategory(e.target.textContent);
                         }}
                     />
-                    <ShopItemList.Component items={displayedItems} />
+                    <ShopItemList items={displayedItems} />
                 </div>
-                <CartSidebar.Component items={cart} />
+                <CartSidebar items={cart} />
                 </>
             ),
         },
         {
             path: "/cart",
-            element: <Cart.Component />,
+            element: <Cart />,
         },
     ]);
 

@@ -2,13 +2,10 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Cart.module.css';
 
-import * as CartItemCard from './../CartItemCard/CartItemCard';
+import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
+import CartItemCard from './../CartItemCard/CartItemCard';
 
-const itemProperties = () => {
-    return CartItemCard.itemProperties();
-}
-
-const Component = ({
+const Cart = ({
     ariaLabel,
     items,
 }) => {
@@ -17,8 +14,11 @@ const Component = ({
             ? (<>
                 <ul className={styles["cart-item-list"]} aria-label="cart-item-list">
                     {Object.keys(items).map((id) => 
-                        <CartItemCard.Component
-                            item={items[id]}
+                        <CartItemCard
+                            item={{
+                                ...ShopItemProperties(),
+                                ...items[id],
+                            }}
                             key={id}
                         />
                     )}
@@ -40,14 +40,14 @@ const Component = ({
     )
 }
 
-Component.propTypes = {
+Cart.propTypes = {
     ariaLabel: PropTypes.string,
     items: PropTypes.object,
 };
 
-Component.defaultProps = {
+Cart.defaultProps = {
     ariaLabel: "shop-cart",
     items: {},
 };
 
-export { Component, itemProperties };
+export default Cart;

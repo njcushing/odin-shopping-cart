@@ -2,37 +2,37 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ShopItemList.module.css';
 
-import * as ShopItemCard from './../ShopItemCard/ShopItemCard';
+import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
+import ShopItemCard from './../ShopItemCard/ShopItemCard';
 
-const itemProperties = () => {
-    return ShopItemCard.itemProperties();
-}
-
-const Component = ({
+const ShopItemList = ({
     ariaLabel,
     items,
 }) => {
     return (
         <div className={styles["ShopItemList"]} aria-label={ariaLabel}>
-            {Object.keys(items).map((item) => 
-                <ShopItemCard.Component
-                    item={items[item]}
-                    key={item}
+            {Object.keys(items).map((id) => 
+                <ShopItemCard
+                    item={{
+                        ...ShopItemProperties(),
+                        ...items[id],
+                    }}
+                    key={id}
                 />
             )}
         </div>
     );
 }
 
-Component.propTypes = {
+ShopItemList.propTypes = {
     ariaLabel: PropTypes.string,
     items: PropTypes.object,
 }
 
-Component.defaultProps = {
+ShopItemList.defaultProps = {
     ariaLabel: "shop-item-list",
     items: {},
 }
 
-export { Component, itemProperties }
+export default ShopItemList;
 
