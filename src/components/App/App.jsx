@@ -28,6 +28,9 @@ function App() {
     const [displayedItems, setDisplayedItems] = useState(new Set());
     const [options, setOptions] = useState([]);
 
+    const displayedItemsRef = useRef();
+    displayedItemsRef.current = displayedItems;
+
     const cartRef = useRef();
     cartRef.current = cart;
 
@@ -54,7 +57,7 @@ function App() {
                         imageUrl: item.image,
                         originalPrice: originalPrice,
                         currentPrice: currentPrice,
-                        quantityMin: 1,
+                        quantityMin: 0,
                         quantityMax: item.rating.count,
                         quantityAvailable: item.rating.count,
                     };
@@ -105,7 +108,7 @@ function App() {
             Object.keys(items).forEach((id) => {
                 const item = items[id];
                 if (item.category === category) {
-                    displayedItemsNew[id] = { ...items[id],
+                    displayedItemsNew[id] = { ...item,
                         quantityMax: item.quantityAvailable - (id in cart ? cart[id].currentQuantity : 0),
                         quantityChangeHandler: (e) => {
                             const itemsCopy = JSON.parse(JSON.stringify(items));
@@ -142,6 +145,12 @@ function App() {
                             }
                         },
                     };
+                    const maxQuantity = item.quantityAvailable - (id in cart ? cart[id].currentQuantity : 0);
+                    if (items[id].currentQuantity > maxQuantity) {
+                        const itemsCopy = JSON.parse(JSON.stringify(items));
+                        itemsCopy[id].currentQuantity = maxQuantity;
+                        setItems(itemsCopy);
+                    }
                 }
             });
             return displayedItemsNew;
@@ -179,7 +188,7 @@ function App() {
             <div className={styles["cart-sidebar-container"]}>
                 <div className={styles["cart-sidebar-content"]}>
                     <Button
-                        text="Go To Checkout"
+                        text="Go To Cart"
                         colour="orange"
                         width="100%"
                         rounded={false}
