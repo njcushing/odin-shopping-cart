@@ -10,7 +10,7 @@ const ShopItemList = ({
     items,
 }) => {
     return (
-        <div className={styles["ShopItemList"]} aria-label={ariaLabel}>
+        <ul className={styles["ShopItemList"]} aria-label={ariaLabel}>
             {Object.keys(items).map((id) => 
                 <ShopItemCard
                     item={{
@@ -20,7 +20,7 @@ const ShopItemList = ({
                     key={id}
                 />
             )}
-        </div>
+        </ul>
     );
 }
 
