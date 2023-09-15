@@ -36,7 +36,10 @@ const Cart = ({
                 </ul>
             </>)
             : (
-                <h4 className={styles["empty-text"]}>Your Cart is Empty</h4>
+                <h4
+                    className={styles["empty-text"]}
+                    aria-label="empty-cart"
+                >Your Cart is Empty</h4>
             )
         }
     </>)
@@ -46,13 +49,17 @@ const Cart = ({
             <div className={styles["container"]}>
                 <h1 className={styles["title"]}>Your Items</h1>
                 <Button
+                    ariaLabel="return-to-shop-button"
                     text="Return to Shop"
                     colour="orange"
                     width="12rem"
                     link={returnToShopLink}
                 />
                 <div className={styles["price-information"]}>
-                    <h4 className={styles["total"]}>Total: </h4>
+                    <h4
+                        className={styles["total"]}
+                        aria-label="total-price"
+                    >Total: </h4>
                     <Price
                         scale={1.6}
                         original={cartTotal}
