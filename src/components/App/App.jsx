@@ -83,6 +83,7 @@ function App() {
             ...NavBar.option(),
             text: "Home",
             colour: "gold",
+            link: "/",
         });
         categories.forEach((category) => {
             optionsNew.push({

@@ -10,6 +10,7 @@ const option = () => {
         id: uuidv4(),
         text: "",
         colour: "gold",
+        link: "",
     }
 }
 
@@ -30,6 +31,7 @@ const Component = ({
                     rounded={false}
                     onClickHandler={option.text !== currentOption ? onClickHandler : () => {}}
                     selected={option.text === currentOption}
+                    link={option.link}
                     key={option.id}
                 />
             )}
@@ -45,6 +47,7 @@ Component.propTypes = {
         id: PropTypes.string,
         text: PropTypes.string,
         colour: PropTypes.string,
+        link: PropTypes.string,
     })).isRequired,
     currentOption: PropTypes.string,
     onClickHandler: PropTypes.func,
