@@ -2,6 +2,7 @@ import { vi } from 'vitest'
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
+import { BrowserRouter } from "react-router-dom";
 import * as NavBar from './NavBar.jsx'
 
 const mockOptions = [
@@ -11,6 +12,12 @@ const mockOptions = [
     { ...NavBar.option(), text: "Option 4", },
     { ...NavBar.option(), text: "Option 5", },
 ]
+
+vi.mock('./../Button/Button.jsx', () => ({ 
+    default: ({ text, onClickHandler }) => {
+        return (<button onClick={onClickHandler}>{text}</button>);
+    }, 
+}));
 
 describe("UI/DOM testing...", () => {
     describe("The unordered-list (<ul>) element containing the NavBar options...", () => {
