@@ -16,7 +16,7 @@ const mockItems = {
 
 vi.mock('./../Button/Button.jsx', () => ({ 
     default: () => {
-        return (<div></div>);
+        return (<button></button>);
     }, 
 }));
 
