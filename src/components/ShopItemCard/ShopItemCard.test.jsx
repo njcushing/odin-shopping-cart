@@ -2,9 +2,12 @@ import { vi } from 'vitest'
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import * as ShopItemCard from './ShopItemCard.jsx'
+import ShopItemCard from './ShopItemCard.jsx'
 
-const mockItem = { /* Do not change existing fields, only add new ones */
+import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
+
+const mockItem = {
+    ...ShopItemProperties(),
     name: "Shop Item",
     imageUrl: "",
     originalPrice: 1500,
@@ -26,23 +29,29 @@ vi.mock('./../IntegerInput/IntegerInput.jsx', () => ({
     }, 
 }));
 
+vi.mock('./../Button/Button.jsx', () => ({ 
+    default: ({ text, onClickHandler }) => {
+        return (<button onClick={onClickHandler}>{text}</button>);
+    }, 
+}));
+
 describe("UI/DOM Testing...", () => {
     describe("The item name element...", () => {
         test(`Should have textContent equal to the provided item.name
          value`, () => {
-            render(<ShopItemCard.Component item={mockItem} />);
+            render(<ShopItemCard item={mockItem} />);
             expect(screen.getByRole("heading", { name: /Shop Item/i })).toBeInTheDocument();
         });
     });
     describe("The IntegerInput component for the 'quantity' prop...", () => {
         test("Should have a label with textContent equal to 'Quantity:'", () => {
-            render(<ShopItemCard.Component item={mockItem} />);
+            render(<ShopItemCard item={mockItem} />);
             expect(screen.getByRole("spinbutton", { name: /Quantity:/i })).toBeInTheDocument();
         });
     });
     describe("The 'Add to Cart' Button...", () => {
         test("Should have textContent equal to 'Add to Cart'", () => {
-            render(<ShopItemCard.Component item={mockItem} />);
+            render(<ShopItemCard item={mockItem} />);
             expect(screen.getByRole("button", { name: /Add to Cart/i })).toBeInTheDocument();
         });
         test(`Should invoke the callback function passed as the
@@ -50,7 +59,7 @@ describe("UI/DOM Testing...", () => {
             const user = userEvent.setup();
             const callback = vi.fn();
             
-            render(<ShopItemCard.Component
+            render(<ShopItemCard
                 item={{ ...mockItem,
                     addToCartHandler: callback,
                 }}
