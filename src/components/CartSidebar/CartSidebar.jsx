@@ -28,7 +28,7 @@ const CartSidebar = ({
                         colour="orange"
                         width="100%"
                         rounded={false}
-                        link={"Cart"}
+                        link={"/cart"}
                     />
                     <div className={styles["item-container"]} aria-label={ariaLabel}>
                     {Object.keys(items).length > 0

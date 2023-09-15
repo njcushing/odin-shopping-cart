@@ -8,6 +8,7 @@ import ShopItemList from './../ShopItemList/ShopItemList';
 import * as NavBar from './../NavBar/NavBar';
 import CartSidebar from './../CartSidebar/CartSidebar';
 import Cart from './../Cart/Cart';
+import Button from './../Button/Button';
 
 const cartInit = {};
 
@@ -163,9 +164,25 @@ function App() {
         {
             path: "/",
             element: (
-                <>
-                Home
-                </>
+                <div className={styles["home-container"]}>
+                    <div className={styles["home-title"]}>
+                        Welcome to my store. Click any of the categories below to start shopping!                    
+                    </div>
+                    <ul className={styles["home-categories-container"]}>
+                    {options.map((option) => 
+                        option.text !== "Home" ?
+                        <Button
+                            text={option.text}
+                            colour={option.colour}
+                            rounded={false}
+                            onClickHandler={() => setCategory(option.text)}
+                            link="/shop"
+                            key={option.id}
+                        />
+                        : null
+                    )}
+                    </ul>
+                </div>
             ),
         },
         {
