@@ -25,7 +25,7 @@ const Button = ({
                 textDecoration: "none",
                 fontSize: `${scale}rem`,
                 boxShadow: `0rem ${scale * 0.2}rem ${scale * 0.16}rem -0rem rgba(0, 0, 0, 0.16)`,
-                padding: `${scale * 0.3}rem ${scale * 0.15}rem`,
+                padding: `${scale * 0.3}rem ${scale * 0.5}rem`,
             }}
             onClick={onClickHandler}
             disabled={!enabled}

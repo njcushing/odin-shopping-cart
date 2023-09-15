@@ -180,7 +180,11 @@ function App() {
         },
         {
             path: "/cart",
-            element: <Cart />,
+            element: <Cart
+                returnToShopLink="/"
+                items={cart}
+                purchaseItemsHandler={() => setCart({})}
+            />,
         },
     ]);
 

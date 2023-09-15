@@ -5,11 +5,21 @@ import styles from './Cart.module.css';
 import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
 import CartItemCard from './../CartItemCard/CartItemCard';
 import Button from './../Button/Button';
+import Price from './../Price/Price';
 
 const Cart = ({
     ariaLabel,
+    returnToShopLink,
     items,
+    purchaseItemsHandler,
 }) => {
+    let cartTotal = 0;
+    let cartKeys = Object.keys(items);
+    for (let i = 0; i < cartKeys.length; i++) {
+        let item = items[cartKeys[i]];
+        cartTotal += item.currentPrice * item.currentQuantity;
+    }
+
     const ele = (<>
         {Object.keys(items).length > 0
             ? (<>
@@ -39,14 +49,22 @@ const Cart = ({
                     text="Return to Shop"
                     colour="orange"
                     width="12rem"
-                    onClickHandler={() => {}}
+                    link={returnToShopLink}
                 />
+                <div className={styles["price-information"]}>
+                    <h4 className={styles["total"]}>Total: </h4>
+                    <Price
+                        scale={1.6}
+                        original={cartTotal}
+                        current={cartTotal}
+                    />
+                </div>
                 {ele}
                 <Button
                     text="Purchase Items"
                     colour="limegreen"
                     width="12rem"
-                    onClickHandler={() => {}}
+                    onClickHandler={purchaseItemsHandler}
                 />
             </div>
         </div>
@@ -55,12 +73,16 @@ const Cart = ({
 
 Cart.propTypes = {
     ariaLabel: PropTypes.string,
+    returnToShopLink: PropTypes.string,
     items: PropTypes.object,
+    purchaseItemsHandler: PropTypes.func,
 };
 
 Cart.defaultProps = {
     ariaLabel: "shop-cart",
+    returnToShopLink: "",
     items: {},
+    purchaseItemsHandler: () => {},
 };
 
 export default Cart;

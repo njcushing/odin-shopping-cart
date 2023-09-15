@@ -23,10 +23,19 @@ const CartItemCard = ({
         </div>
         <div className={styles["information-container"]}>
             <h4 className={styles["item-name"]}>{itemProps.name}</h4>
-            <Price
-                original={itemProps.currentPrice * itemProps.currentQuantity}
-                current={itemProps.currentPrice * itemProps.currentQuantity}
-            />
+            <div className={styles["price-information"]}>
+                <Price
+                    original={itemProps.currentPrice * itemProps.currentQuantity}
+                    current={itemProps.currentPrice * itemProps.currentQuantity}
+                />
+                <div className={styles["price-component-text-match"]}>{`( ${itemProps.currentQuantity} x `}</div>
+                <Price
+                    scale={0.8}
+                    original={itemProps.currentPrice}
+                    current={itemProps.currentPrice}
+                />
+                <div className={styles["price-component-text-match"]}>{` )`}</div>
+            </div>
             <IntegerInput
                 label="Quantity: "
                 integer={itemProps.currentQuantity}
