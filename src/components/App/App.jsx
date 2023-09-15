@@ -163,6 +163,14 @@ function App() {
             path: "/",
             element: (
                 <>
+                Home
+                </>
+            ),
+        },
+        {
+            path: "/shop",
+            element: (
+                <>
                 <div className={styles["shop-main"]}>
                     <NavBar.Component
                         ariaLabel="item-categories"
@@ -181,7 +189,7 @@ function App() {
         {
             path: "/cart",
             element: <Cart
-                returnToShopLink="/"
+                returnToShopLink="/shop"
                 items={cart}
                 purchaseItemsHandler={() => setCart({})}
             />,
