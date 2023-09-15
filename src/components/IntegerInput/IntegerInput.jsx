@@ -33,7 +33,11 @@ const IntegerInput = ({
                     }}
                     onChange={(e) => {
                         if (e.target.value.length === 0) e.target.value = integerMin.toString();
-                        e.target.value = Math.floor(Number.parseInt(e.target.value)).toString();
+                        e.target.value = Math.floor(
+                            Number.parseInt(
+                                Math.min(integerMax, Math.max(integerMin, e.target.value))
+                            )
+                        ).toString();
                         onChangeHandler(e);
                     }}
                 ></input>
