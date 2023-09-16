@@ -6,9 +6,9 @@ const ShopItemProperties = (
     quantityMin = 0,
     quantityMax = 0,
     currentQuantity = 0,
-    quantityChangeHandler = () => {},
-    addToCartHandler = () => {},
-    removeFromCartHandler = () => {},
+    quantityChangeHandler = null,
+    addToCartHandler = null,
+    removeFromCartHandler = null,
 ) => {
     if (typeof name !== "string") name = "Item Information Not Found";
     if (typeof imageUrl !== "string") imageUrl = "";
@@ -17,9 +17,9 @@ const ShopItemProperties = (
     if (!Number.isInteger(quantityMin)) quantityMin = 0;
     if (!Number.isInteger(quantityMax)) quantityMax = 0;
     if (!Number.isInteger(currentQuantity)) currentQuantity = 0;
-    if (typeof quantityChangeHandler !== "function") quantityChangeHandler = () => {};
-    if (typeof addToCartHandler !== "function") addToCartHandler = () => {};
-    if (typeof removeFromCartHandler !== "function") removeFromCartHandler = () => {};
+    if (typeof quantityChangeHandler !== "function") quantityChangeHandler = null;
+    if (typeof addToCartHandler !== "function") addToCartHandler = null;
+    if (typeof removeFromCartHandler !== "function") removeFromCartHandler = null;
 
     return {
         name,
