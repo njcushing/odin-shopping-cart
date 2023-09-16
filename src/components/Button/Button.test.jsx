@@ -35,14 +35,14 @@ describe("UI/DOM Testing...", () => {
             const button = screen.getByRole("link", { name: /Button/i });
             expect(button.getAttribute('disabled')).toBeFalsy();
         });
-        test(`Should have no 'border-radius' styling value of '9999px' if
-         the 'rounded' prop is set to is set to 'true'`, () => {
+        test(`Should have a 'border-radius' styling value of '9999px' if
+         the 'rounded' prop === 'true'`, () => {
             render(<BrowserRouter><Button rounded={true} /></BrowserRouter>);
             const button = screen.getByRole("link", { name: /Button/i });
             expect(button.style["border-radius"]).toBe("9999px");
         });
-        test(`Should have no 'border-radius' styling value of '0px' if
-        the 'rounded' prop is set to is set to 'true'`, () => {
+        test(`Should have a 'border-radius' styling value of '0px' if
+        the 'rounded' prop === 'true'`, () => {
             render(<BrowserRouter><Button rounded={false} /></BrowserRouter>);
             const button = screen.getByRole("link", { name: /Button/i });
             expect(button.style["border-radius"]).toBe("0px");
