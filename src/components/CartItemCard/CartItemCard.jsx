@@ -25,11 +25,13 @@ const CartItemCard = ({
             <h4 className={styles["item-name"]}>{itemProps.name}</h4>
             <div className={styles["price-information"]}>
                 <Price
+                    aria-label={"total-price"}
                     original={itemProps.currentPrice * itemProps.currentQuantity}
                     current={itemProps.currentPrice * itemProps.currentQuantity}
                 />
                 <div className={styles["price-component-text-match"]}>{`( ${itemProps.currentQuantity} x `}</div>
                 <Price
+                    aria-label={"individual-price"}
                     scale={0.8}
                     original={itemProps.currentPrice}
                     current={itemProps.currentPrice}
