@@ -14,9 +14,12 @@ const IntegerInput = ({
     integerMin = Math.floor(Math.max(Math.min(integerMin, integerMax), 0));
     integerMax = Math.floor(Math.min(Math.max(integerMax, integerMin), Number.MAX_SAFE_INTEGER));
 
-    integer = Math.floor(Math.max(Math.min(integer, integerMax), integerMin));
+    const integerCorrected = Math.floor(Math.max(Math.min(integer, integerMax), integerMin));
 
-    return (
+    const [val, setVal] = useState(integerCorrected.toString());
+    useEffect(() => setVal(integerCorrected), [integerCorrected]);
+
+    const ele = (
         <div className={styles["IntegerInput"]}>
             <label
                 className={styles["label"]}
@@ -27,7 +30,7 @@ const IntegerInput = ({
                     min={integerMin}
                     max={integerMax}
                     className={styles[`${outlined ? 'input-outlined' : 'input'}`]}
-                    value={integer}
+                    value={val}
                     onKeyDown={(e) => {
                         if (e.key === '.') e.preventDefault();
                     }}
@@ -38,12 +41,15 @@ const IntegerInput = ({
                                 Math.min(integerMax, Math.max(integerMin, e.target.value))
                             )
                         ).toString();
-                        onChangeHandler(e);
+                        setVal(e.target.value);
+                        onChangeHandler !== null && onChangeHandler(Number.parseInt(e.target.value));
                     }}
                 ></input>
             </label>
         </div>
     )
+
+    return ele;
 };
 
 IntegerInput.propTypes = {
@@ -61,7 +67,7 @@ IntegerInput.defaultProps = {
     integer: 0,
     integerMin: 0,
     integerMax: 0,
-    onChangeHandler: () => {},
+    onChangeHandler: null,
     width: "auto",
     outlined: false,
 }

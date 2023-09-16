@@ -113,9 +113,9 @@ function App() {
                 if (item.category === category) {
                     displayedItemsNew[id] = { ...item,
                         quantityMax: item.quantityAvailable - (id in cart ? cart[id].currentQuantity : 0),
-                        quantityChangeHandler: (e) => {
+                        quantityChangeHandler: (value) => {
                             const itemsCopy = JSON.parse(JSON.stringify(items));
-                            itemsCopy[id].currentQuantity = Math.floor(Number.parseInt(e.target.value));
+                            itemsCopy[id].currentQuantity = value;
                             setItems(itemsCopy);
                         },
                         addToCartHandler: () => {
@@ -133,9 +133,9 @@ function App() {
                                 const cartCopyKeys = Object.keys(cartCopy);
                                 cartCopyKeys.forEach((key) => {
                                     const cartCopyItem = cartCopy[key];
-                                    cartCopyItem.quantityChangeHandler = (e) => {
+                                    cartCopyItem.quantityChangeHandler = (value) => {
                                         const cartCopy = cartDeepCopy();
-                                        cartCopy[key].currentQuantity = Math.floor(Number.parseInt(e.target.value));
+                                        cartCopy[key].currentQuantity = value;
                                         setCart(cartCopy);
                                     }
                                     cartCopyItem.removeFromCartHandler = () => {
