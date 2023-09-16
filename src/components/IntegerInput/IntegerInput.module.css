@@ -7,8 +7,7 @@
     font-size: 0.75rem;
 }
 
-.input,
-.input-outlined {
+.input {
     font-size: 1rem;
     height: 0.8rem;
     width: 100%;
@@ -21,14 +20,14 @@
 .input {
     border: 0.14rem solid white;
 }
-.input-outlined {
+.input[outlined=true] {
     border: 0.14rem solid rgb(44, 44, 44);
 }
 
 .input:focus {
     border: 0.14rem solid white;
 }
-.input-outlined:focus {
+.input[outlined=true]:focus {
     border: 0.14rem solid rgb(44, 44, 44);
 }
 
@@ -36,7 +35,7 @@
     border: 0.14rem solid rgb(243, 243, 243);
     background-color: rgb(243, 243, 243);
 }
-.input-outlined:hover {
+.input[outlined=true]:hover {
     border: 0.14rem solid rgb(44, 44, 44);
     background-color: rgb(243, 243, 243);
 }

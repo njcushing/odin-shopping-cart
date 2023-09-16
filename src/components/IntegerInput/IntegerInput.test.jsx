@@ -7,7 +7,7 @@ import IntegerInput from './IntegerInput.jsx'
 describe("UI/DOM Testing...", () => {
     describe("The input element for the 'integer' prop...", () => {
         test("Should have a default value of 0", () => {
-            render(<IntegerInput />);
+            render(<IntegerInput outlined={true} />);
             const ele = screen.getByRole("spinbutton", { name: /Number:/i });
             expect(ele).toHaveValue(0);
         });
@@ -47,7 +47,7 @@ describe("UI/DOM Testing...", () => {
          in the input's value`, async () => {
             const user = userEvent.setup();
             
-            render(<IntegerInput integer={0} integerMin={0} integerMax={100} />);
+            render(<IntegerInput integer={0} integerMin={0} integerMax={10} />);
             const ele = screen.getByRole("spinbutton", { name: /Number:/i });
 
             await user.type(ele, "5");
@@ -55,6 +55,29 @@ describe("UI/DOM Testing...", () => {
 
             await user.type(ele, ".");
             expect(ele).toHaveValue(5);
+        });
+        test(`Attempting to delete the last digit in the input should automatically
+         cause its value to be equal to the value of the 'integerMin' prop`, async () => {
+            const user = userEvent.setup();
+            
+            render(<IntegerInput integer={8} integerMin={4} integerMax={10} />);
+            const ele = screen.getByRole("spinbutton", { name: /Number:/i });
+
+            expect(ele).toHaveValue(8);
+            await user.type(ele, '{backspace}');
+            expect(ele).toHaveValue(4);
+        });
+        test(`Should have the 'outlined' attribute with a value of 'true' if
+         the 'outlined' prop === true`, () => {
+            render(<IntegerInput outlined={true} />);
+            const ele = screen.getByRole("spinbutton", { name: /Number:/i });
+            expect(ele.getAttribute('outlined')).toBe("true");
+        });
+        test(`Should have the 'outlined' attribute with a value of 'false' if
+        the 'outlined' prop === false`, () => {
+            render(<IntegerInput outlined={false} />);
+            const ele = screen.getByRole("spinbutton", { name: /Number:/i });
+            expect(ele.getAttribute('outlined')).toBe("false");
         });
     });
 });
