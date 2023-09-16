@@ -73,7 +73,7 @@ Button.defaultProps = {
     width: "auto",
     rounded: true,
     scale: 1.0,
-    onClickHandler: () => {},
+    onClickHandler: null,
     enabled: true,
     selected: false,
     link: "",
