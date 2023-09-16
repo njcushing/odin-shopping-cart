@@ -15,6 +15,9 @@ const mockItem = {
     quantityMin: 0,
     quantityMax: 100,
     currentQuantity: 10,
+    quantityChangeHandler: () => {},
+    addToCartHandler: () => {},
+    removeFromCartHandler: () => {},
 }
 
 vi.mock('./../Image/Image.jsx', () => ({ 
@@ -35,8 +38,14 @@ vi.mock('./../Price/Price.jsx', () => ({
 }));
 
 vi.mock('./../IntegerInput/IntegerInput.jsx', () => ({ 
-    default: ({ integer }) => {
-        return <input type="number" value={integer}></input>
+    default: ({ integer, onChangeHandler }) => {
+        return (
+            <input
+                type="number"
+                value={integer}
+                onChange={onChangeHandler}
+            ></input>
+        );
     }, 
 }));
 
