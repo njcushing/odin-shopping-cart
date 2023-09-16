@@ -89,7 +89,7 @@ Cart.defaultProps = {
     ariaLabel: "shop-cart",
     returnToShopLink: "",
     items: {},
-    purchaseItemsHandler: () => {},
+    purchaseItemsHandler: null,
 };
 
 export default Cart;
