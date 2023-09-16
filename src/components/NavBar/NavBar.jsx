@@ -54,7 +54,7 @@ Component.propTypes = {
 }
 
 Component.defaultProps = {
-    onClickHandler: () => {},
+    onClickHandler: null,
 }
 
 export { Component, option };
