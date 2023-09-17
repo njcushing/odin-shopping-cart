@@ -8,7 +8,7 @@ const ShopItemProperties = (
     currentQuantity = 0,
     quantityChangeHandler = null,
     addToCartHandler = null,
-    removeFromCartHandler = null,
+    removeFromCartHandler = null
 ) => {
     if (typeof name !== "string") name = "Item Information Not Found";
     if (typeof imageUrl !== "string") imageUrl = "";
@@ -17,9 +17,11 @@ const ShopItemProperties = (
     if (!Number.isInteger(quantityMin)) quantityMin = 0;
     if (!Number.isInteger(quantityMax)) quantityMax = 0;
     if (!Number.isInteger(currentQuantity)) currentQuantity = 0;
-    if (typeof quantityChangeHandler !== "function") quantityChangeHandler = null;
+    if (typeof quantityChangeHandler !== "function")
+        quantityChangeHandler = null;
     if (typeof addToCartHandler !== "function") addToCartHandler = null;
-    if (typeof removeFromCartHandler !== "function") removeFromCartHandler = null;
+    if (typeof removeFromCartHandler !== "function")
+        removeFromCartHandler = null;
 
     return {
         name,
@@ -32,7 +34,7 @@ const ShopItemProperties = (
         quantityChangeHandler,
         addToCartHandler,
         removeFromCartHandler,
-    }
-}
+    };
+};
 
 export default ShopItemProperties;
