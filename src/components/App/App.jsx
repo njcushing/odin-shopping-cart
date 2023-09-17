@@ -3,6 +3,7 @@ import styles from './App.module.css'
 import { v4 as uuidv4 } from 'uuid';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import FakeStoreAPIFetch from './../../modules/FakeStoreAPIFetch/FakeStoreAPIFetch';
 import ShopItemProperties from './../../modules/ShopItemProperties/ShopItemProperties';
 import ShopItemList from './../ShopItemList/ShopItemList';
 import * as NavBar from './../NavBar/NavBar';
@@ -10,20 +11,8 @@ import CartSidebar from './../CartSidebar/CartSidebar';
 import Cart from './../Cart/Cart';
 import Button from './../Button/Button';
 
-const cartInit = {};
-
-let discounts = [ /* Fake Store API has 20 items */
-    0.14, 0.24, 0.10, 0.05, 0.07, 0.30, 0.00, 0.16, 0.11, 0.20,
-    0.12, 0.11, 0.03, 0.00, 0.17, 0.24, 0.06, 0.09, 0.15, 0.22,
-];
-let calculatePrice = (original, discount) => {
-    return Math.ceil(original * (1.0 - discount));
-}
-
-const Url = 'https://fakestoreapi.com/products/';
-
 function App() {
-    const [cart, setCart] = useState(JSON.parse(JSON.stringify(cartInit)));
+    const [cart, setCart] = useState(JSON.parse(JSON.stringify({})));
     const [categories, setCategories] = useState(new Set());
     const [category, setCategory] = useState("men's clothing");
     const [items, setItems] = useState({});
@@ -37,39 +26,10 @@ function App() {
     cartRef.current = cart;
 
     useEffect(() => {
-        fetch(Url, { mode: 'cors' })
-        .then((response) => {
-            if (response.status >= 400) {
-                throw new Error(`Warning: ${Url} is an invalid url for the Fake Store API`);
-            }
-            return response.json();
-        })
-        .then((response) => {
-            setItems(() => {
-                const itemsNew = {};
-                Object.keys(response).forEach((key) => {
-                    const item = response[key];
-                    const id = item.id;
-                    const originalPrice = (item.price * 100);
-                    const currentPrice = calculatePrice((item.price * 100), discounts[Object.keys(itemsNew).length]);
-                    itemsNew[id] = { ...ShopItemProperties(),
-                        id: id,
-                        category: item.category,
-                        name: item.description,
-                        imageUrl: item.image,
-                        originalPrice: originalPrice,
-                        currentPrice: currentPrice,
-                        quantityMin: 0,
-                        quantityMax: item.rating.count,
-                        quantityAvailable: item.rating.count,
-                    };
-                });
-                return itemsNew;
-            });
-        })
-        .catch((error) => {
-            throw new Error(error);
-        });
+        (async () => {
+            const itemsNew = await FakeStoreAPIFetch();
+            setItems(itemsNew instanceof Error ? {} : itemsNew);
+        })();
     }, []);
 
     useEffect(() => {
@@ -168,7 +128,7 @@ function App() {
                     <div className={styles["home-title"]}>
                         Welcome to my store. Click any of the categories below to start shopping!                    
                     </div>
-                    <ul className={styles["home-categories-container"]}>
+                    <ul className={styles["home-categories-container"]} aria-label="home-categories">
                     {options.map((option) => 
                         option.text !== "Home" ?
                         <Button
