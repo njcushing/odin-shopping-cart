@@ -19,6 +19,22 @@ const mockItem = {
     addToCartHandler: () => {},
 }
 
+vi.mock('./../Image/Image.jsx', () => ({ 
+    default: ({ url, alt }) => {
+        return (<img src={url} alt={alt}></img>);
+    }, 
+}));
+
+vi.mock('./../Price/Price.jsx', () => ({ 
+    default: ({ original, current }) => {
+        return (
+            <>
+                <div aria-label="price">{original}</div>
+            </>
+        );
+    }, 
+}));
+
 vi.mock('./../IntegerInput/IntegerInput.jsx', () => ({ 
     default: ({ label, integer }) => {
         return (<>
