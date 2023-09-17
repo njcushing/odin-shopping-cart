@@ -7,16 +7,15 @@ const Image = ({
     alt,
 }) => {
     const [image, setImage] = useState("");
-    const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(url, { mode: 'cors' })
-            .then((response) => { if (response.status >= 400) throw new
-                Error(`${url} is not a link to a valid image.`);
-                return response; 
-            })
-            .then((response) => setImage(response.url))
-            .catch((error) => { setError(error) });
+        try {
+            new URL(url);
+        } catch (error) {
+            setImage("");
+            return;
+        }
+        setImage(url);
     }, [url]);
 
     return (
