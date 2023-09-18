@@ -15,8 +15,22 @@ const FakeStoreAPIItemFormat = {
     },
 };
 
+const mockItem1 = {
+    ...FakeStoreAPIItemFormat,
+    id: 1,
+    title: "Test",
+    price: 80.0,
+    description: "test item",
+    category: "test category",
+    image: "https://a",
+    rating: {
+        rate: 3.6,
+        count: 8,
+    },
+};
+
 const mockItems = [
-    { ...FakeStoreAPIItemFormat, id: 1 },
+    { ...mockItem1 },
     { ...FakeStoreAPIItemFormat, id: 2 },
     { ...FakeStoreAPIItemFormat, id: 3 },
     { ...FakeStoreAPIItemFormat, id: 4 },
@@ -88,6 +102,14 @@ describe("Invoking the FakeStoreAPIFetch function...", () => {
 
                 const response = FakeStoreAPIFetch();
                 expect(Object.keys(response).length).toBe(mockItems.length);
+            });
+            test(`Each nested object should be in the extracted format defined
+           by the initItem function within this test suite`, () => {
+                const url = "https://a";
+                FakeStoreAPIFetch.mockImplementation(() => fetchMock(url));
+
+                const response = FakeStoreAPIFetch();
+                expect(response["1"]).toStrictEqual(initItem(mockItem1, 0));
             });
         });
     });
