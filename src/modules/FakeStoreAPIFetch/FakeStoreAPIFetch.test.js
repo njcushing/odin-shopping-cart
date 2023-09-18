@@ -2,9 +2,26 @@ import { vi } from "vitest";
 import ShopItemProperties from "./../ShopItemProperties/ShopItemProperties";
 import FakeStoreAPIFetch from "./FakeStoreAPIFetch.js";
 
-vi.mock("./FakeStoreAPIFetch");
+const FakeStoreAPIItemFormat = {
+    id: 0,
+    title: "",
+    price: 109.95,
+    description: "",
+    category: "",
+    image: "",
+    rating: {
+        rate: 0.0,
+        count: 1,
+    },
+};
 
-const url = "https://fakestoreapi.com/products/";
+const mockItems = [
+    { ...FakeStoreAPIItemFormat, id: 1 },
+    { ...FakeStoreAPIItemFormat, id: 2 },
+    { ...FakeStoreAPIItemFormat, id: 3 },
+    { ...FakeStoreAPIItemFormat, id: 4 },
+    { ...FakeStoreAPIItemFormat, id: 5 },
+];
 
 const initItem = (item, index) => {
     const id = item.id;
@@ -24,30 +41,29 @@ const initItem = (item, index) => {
     };
 };
 
-let discounts = [
-    /* Fake Store API has 20 items */ 0.14, 0.24, 0.1, 0.05, 0.07, 0.3, 0.0,
-    0.16, 0.11, 0.2, 0.12, 0.11, 0.03, 0.0, 0.17, 0.24, 0.06, 0.09, 0.15, 0.22,
-];
+let discounts = [0.14, 0.24, 0.1, 0.05, 0.07];
 
 let calculatePrice = (original, discount) => {
     return Math.ceil(original * (1.0 - discount));
 };
 
 const responseMock = () => {
-    return {};
+    const items = {};
+    for (let i = 0; i < mockItems.length; i++) {
+        const item = mockItems[i];
+        items[item.id] = initItem(item, i);
+    }
+    return items;
 };
 
+vi.mock("./FakeStoreAPIFetch");
 const fetchMock = (url) => {
-    const items = {};
+    let items;
     let errorInst = null;
     try {
         new URL(url);
-        const json = responseMock();
-        const itemKeys = Object.keys(json);
-        for (let i = 0; i < itemKeys.length; i++) {
-            const item = json[itemKeys[i]];
-            items[item.id] = initItem(item, i);
-        }
+        /* ...fetch(url) ... */
+        items = responseMock();
     } catch (error) {
         errorInst = new Error(error);
     }
@@ -57,12 +73,22 @@ const fetchMock = (url) => {
 
 describe("Invoking the FakeStoreAPIFetch function...", () => {
     describe("When the url used in the fetch is valid...", () => {
-        test("Should return an object", () => {
-            const url = "https://fakestoreapi.com/products/";
-            FakeStoreAPIFetch.mockImplementation(() => fetchMock(url));
+        describe("The return value...", () => {
+            test("Should be an object,", () => {
+                const url = "https://a";
+                FakeStoreAPIFetch.mockImplementation(() => fetchMock(url));
 
-            const response = FakeStoreAPIFetch();
-            expect(typeof response === "object").toBeTruthy();
+                const response = FakeStoreAPIFetch();
+                expect(typeof response === "object").toBeTruthy();
+            });
+            test(`That contains one nested object for each item returned by
+           the API,`, () => {
+                const url = "https://a";
+                FakeStoreAPIFetch.mockImplementation(() => fetchMock(url));
+
+                const response = FakeStoreAPIFetch();
+                expect(Object.keys(response).length).toBe(mockItems.length);
+            });
         });
     });
     describe("When the url used in the fetch is invalid...", () => {
