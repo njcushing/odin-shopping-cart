@@ -14,7 +14,7 @@ import Button from './../Button/Button';
 function App() {
     const [cart, setCart] = useState(JSON.parse(JSON.stringify({})));
     const [categories, setCategories] = useState(new Set());
-    const [category, setCategory] = useState("men's clothing");
+    const [category, setCategory] = useState("");
     const [items, setItems] = useState({});
     const [displayedItems, setDisplayedItems] = useState(new Set());
     const [options, setOptions] = useState([]);
