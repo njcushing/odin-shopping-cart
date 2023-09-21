@@ -18,6 +18,8 @@
 }
 
 .input {
+    color: black;
+    background-color: none;
     border: 0.14rem solid white;
 }
 .input[outlined=true] {
